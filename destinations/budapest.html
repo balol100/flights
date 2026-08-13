@@ -87,23 +87,6 @@ footer a{color:var(--cyan-400)}
 .related-card .flag{font-size:1.5rem}
 .related-card .name{font-weight:600;margin-top:4px}
 @media(max-width:768px){.hero h1{font-size:1.4rem}.info-grid{grid-template-columns:1fr 1fr}}
-
-
-/* MODAL STYLES */
-.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center}
-.modal-overlay.show{display:flex}
-.modal{background:#fff;border-radius:16px;padding:32px;max-width:600px;width:90%;max-height:85vh;overflow-y:auto;position:relative;text-align:right}
-.modal h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}
-.modal p{margin-bottom:10px;line-height:1.7;font-size:.95rem;color:#475569}
-.modal-close{position:absolute;top:12px;left:12px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#94a3b8}
-[dir="ltr"] .modal-close{left:auto;right:12px}
-/* AFFILIATE DISCLOSURE */
-.affiliate-disclosure{background:#ecfeff;border:1px solid #a5f3fc;border-radius:8px;padding:8px 14px;font-size:.8rem;color:#155e75;text-align:center;margin:8px 0}
-/* LEGAL FOOTER */
-.legal-footer{background:#0f172a;border-top:1px solid #334155;padding:16px 20px;text-align:center}
-.legal-footer p{font-size:.78rem;color:#94a3b8;max-width:900px;margin:0 auto;line-height:1.7}
-.legal-footer a{color:#22d3ee;text-decoration:underline}
-
 </style>
 </head>
 <body>
@@ -111,8 +94,6 @@ footer a{color:var(--cyan-400)}
   <a href="/" class="logo">✈️ flights.lior-ai.com</a>
   <div><a href="/">חיפוש טיסות</a> &nbsp;|&nbsp; <a href="/blog/">בלוג</a> &nbsp;|&nbsp; <a href="https://lior-ai.com">Lior AI</a></div>
 </div></nav>
-<div class="affiliate-disclosure">אתר זה משתמש בקישורי שותפים. אנו עשויים לקבל עמלה על הזמנות ללא עלות נוספת לכם.</div>
-
 
 <section class="hero">
   <span class="flag">🇭🇺</span>
@@ -176,94 +157,7 @@ footer a{color:var(--cyan-400)}
 <footer>
   <p>✈️ <a href="/">flights.lior-ai.com</a> — השוואת טיסות זולות מנתב״ג | <a href="https://lior-ai.com">Lior AI</a></p>
   <p>© 2026 Lior AI. כל הזכויות שמורות.</p>
-  <div style="margin-top:8px;font-size:.85rem;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="#" onclick="showModal('termsModal');return false" style="color:#22d3ee">תנאי שימוש</a>
-      <a href="#" onclick="showModal('accessibilityModal');return false" style="color:#22d3ee">הצהרת נגישות</a>
-      <a href="#" onclick="showModal('privacyModal');return false" style="color:#22d3ee">מדיניות פרטיות</a>
-    </div>
-  <div class="legal-footer"><p>flights.lior-ai.com הוא אתר השוואת מחירים בלבד ואינו סוכנות נסיעות. איננו מבצעים הזמנות, איננו אחראים על שינויי מחירים או זמינות. ההזמנה מתבצעת ישירות מול חברות התעופה או אתרי ההזמנה. חלק מהקישורים באתר הם קישורי שותפים (affiliate) ואנו עשויים לקבל עמלה ללא עלות נוספת לכם.</p></div>
 </footer>
-
-</div>
-
-
-<!-- LEGAL MODALS -->
-<div class="modal-overlay" id="termsModal">
-<div class="modal">
-  <button class="modal-close" onclick="hideModal('termsModal')">×</button>
-  <h2>תנאי שימוש — flights.lior-ai.com</h2>
-  <p><strong>עדכון אחרון:</strong> אוגוסט 2026</p>
-  <p>אתר flights.lior-ai.com הוא אתר השוואת מחירי טיסות בלבד, <strong>ואינו סוכנות נסיעות</strong>. האתר אינו מבצע הזמנות, אינו מנפיק כרטיסי טיסה ואינו צד לכל עסקה.</p>
-  <p>אנחנו לא אחראים על הזמנות, ביטולים, שינויים או כל עניין הקשור לטיסה שנרכשה דרך אתרי צד שלישי. כל הזמנה מתבצעת ישירות מול חברת התעופה או אתר ההזמנה.</p>
-  <p>מחירים המוצגים באתר מגיעים ממקורות חיצוניים (Google Flights, Skyscanner, Kayak ועוד) ועשויים להשתנות בכל רגע. אנו לא מתחייבים לדיוק או עדכניות המחירים.</p>
-  <p>חלק מהקישורים באתר הם קישורי שותפים (affiliate). אנו עשויים לקבל עמלה מאתרי הזמנה כאשר משתמשים לוחצים על קישור ומבצעים רכישה — <strong>ללא כל עלות נוספת למשתמש</strong>.</p>
-  <p>השירות הוא חינמי לחלוטין. השימוש באתר מהווה הסכמה לתנאים אלה.</p>
-  <p>יצירת קשר: <a href="mailto:liorbll100@gmail.com">liorbll100@gmail.com</a></p>
-</div>
-</div>
-
-<div class="modal-overlay" id="accessibilityModal">
-<div class="modal">
-  <button class="modal-close" onclick="hideModal('accessibilityModal')">×</button>
-  <h2>הצהרת נגישות — flights.lior-ai.com</h2>
-  <p><strong>עדכון אחרון:</strong> אוגוסט 2026</p>
-  <p>אתר flights.lior-ai.com הוא אתר להשוואת מחירי טיסות מנתב״ג. האתר כולל טופס חיפוש טיסות, דפי יעדים עם מידע על טיסות, ומאמרי בלוג עם טיפים לחיסכון.</p>
-  <p>אנו שואפים להנגיש את האתר לכלל האוכלוסייה, לרבות אנשים עם מוגבלויות, בהתאם לתקן הישראלי (ת"י 5568) ולהנחיות WCAG 2.1 ברמת AA.</p>
-  <p>התאמות נגישות: ווידג'ט נגישות (הגדלת גופן, ניגודיות גבוהה, הדגשת קישורים, עצירת אנימציות), תמיכה בניווט מקלדת, תאימות לקוראי מסך, תמיכה ב-RTL/LTR, תצוגה רספונסיבית למכשירים ניידים.</p>
-  <p>נתקלתם בבעיית נגישות? נשמח לשמוע ולתקן: <a href="mailto:liorbll100@gmail.com">liorbll100@gmail.com</a></p>
-</div>
-</div>
-
-<div class="modal-overlay" id="privacyModal">
-<div class="modal">
-  <button class="modal-close" onclick="hideModal('privacyModal')">×</button>
-  <h2>מדיניות פרטיות — flights.lior-ai.com</h2>
-  <p><strong>עדכון אחרון:</strong> אוגוסט 2026</p>
-  <p>אנו אוספים כתובת אימייל רק כאשר המשתמש נרשם להתראות טיסות. האימייל משמש אך ורק לשליחת עדכונים על דילי טיסות.</p>
-  <p>באתר מותקן סקריפט Travelpayouts Drive לצורכי מעקב שותפים (affiliate cookie tracking). סקריפט זה מאפשר לנו לקבל עמלה כאשר משתמשים מבצעים הזמנה דרך קישורי שותפים באתר.</p>
-  <p>אנו לא משתפים מידע אישי עם צד שלישי מעבר לשותפים העסקיים (Travelpayouts / Skyscanner) הנדרשים לצורך מעקב עמלות.</p>
-  <p>ביטול הרשמה (unsubscribe) אפשרי בקליק אחד דרך הקישור בכל אימייל שנשלח.</p>
-  <p>לשאלות בנושא פרטיות: <a href="mailto:liorbll100@gmail.com">liorbll100@gmail.com</a></p>
-</div>
-</div>
-
-
-<!-- ACCESSIBILITY WIDGET (INLINE) -->
-</div>
-
-
-<script>
-function showModal(id){document.getElementById(id).classList.add('show')}
-function hideModal(id){document.getElementById(id).classList.remove('show')}
-document.querySelectorAll('.modal-overlay').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('show')})});
-</script>
-
-<!-- A11Y FAB WIDGET -->
-<div id="a11yWidget">
-<style>
-#a11yFab{position:fixed!important;bottom:20px!important;left:20px!important;width:52px!important;height:52px!important;border-radius:50%!important;background:#6366f1!important;color:#fff!important;border:none!important;cursor:pointer!important;font-size:28px!important;display:flex!important;align-items:center!important;justify-content:center!important;box-shadow:0 4px 14px rgba(0,0,0,0.35)!important;z-index:9999!important;transition:transform .2s!important;padding:0!important;margin:0!important;line-height:1!important}
-#a11yFab:hover{transform:scale(1.1)!important}
-#a11yPanel{display:none;position:fixed;bottom:82px;left:20px;background:#0f172a;color:#e2e8f0;border-radius:14px;padding:20px;box-shadow:0 8px 30px rgba(0,0,0,0.4);z-index:9999;width:250px;font-family:inherit}
-#a11yPanel.show{display:block}
-#a11yPanel h3{font-size:1rem;font-weight:700;margin:0 0 14px 0;color:#fff;display:flex;align-items:center;justify-content:space-between}
-#a11yPanel h3 button{background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1.2rem;padding:0;line-height:1}
-#a11yPanel h3 button:hover{color:#fff}
-#a11yReset{display:block;width:100%;margin-top:12px;padding:8px;background:#1e293b;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:#94a3b8;transition:.2s}
-#a11yReset:hover{background:#334155;color:#fff}
-body.high-contrast{filter:contrast(1.4)}
-body.big-text{font-size:120%}
-body.highlight-links a{outline:2px solid #6366f1!important;outline-offset:2px}
-body.stop-animations,body.stop-animations *{animation:none!important;transition:none!important}
-</style>
-<button id="a11yFab" aria-label="נגישות" onclick="document.getElementById('a11yPanel').classList.toggle('show')">♿</button>
-<div id="a11yPanel">
-  <h3><span>נגישות</span><button onclick="document.getElementById('a11yPanel').classList.remove('show')">✕</button></h3>
-  <div class="a11y-row" onclick="document.body.classList.toggle('big-text');this.querySelector('.a11y-sw').classList.toggle('on')"><span>הגדלת טקסט</span><div class="a11y-sw"></div></div>
-  <div class="a11y-row" onclick="document.body.classList.toggle('high-contrast');this.querySelector('.a11y-sw').classList.toggle('on')"><span>ניגודיות גבוהה</span><div class="a11y-sw"></div></div>
-  <div class="a11y-row" onclick="document.body.classList.toggle('highlight-links');this.querySelector('.a11y-sw').classList.toggle('on')"><span>הדגשת קישורים</span><div class="a11y-sw"></div></div>
-  <div class="a11y-row" onclick="document.body.classList.toggle('stop-animations');this.querySelector('.a11y-sw').classList.toggle('on')"><span>עצירת אנימציות</span><div class="a11y-sw"></div></div>
-  <button id="a11yReset" onclick="['big-text','high-contrast','highlight-links','stop-animations'].forEach(c=>{document.body.classList.remove(c)});document.querySelectorAll('#a11yPanel .a11y-sw').forEach(s=>s.classList.remove('on'))">איפוס</button>
-</div>
-</div>
+<script src="https://lior-ai-tools.netlify.app/ai-accessibility.js"></script>
 </body>
 </html>
