@@ -87,6 +87,16 @@ footer a{color:var(--cyan-400)}
 .related-card .flag{font-size:1.5rem}
 .related-card .name{font-weight:600;margin-top:4px}
 @media(max-width:768px){.hero h1{font-size:1.4rem}.info-grid{grid-template-columns:1fr 1fr}}
+
+.dest-services{margin:32px 0;padding:24px 0;border-top:2px solid var(--cyan-100)}
+.dest-services h2{font-size:1.3rem;font-weight:700;color:var(--gray-800);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--cyan-100)}
+.dest-services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.dest-service-card{background:#fff;padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:.2s;text-decoration:none;color:inherit;display:block;border-top:3px solid var(--cyan-400)}
+.dest-service-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.dest-service-card .ds-icon{font-size:1.8rem;margin-bottom:8px}
+.dest-service-card .ds-name{font-weight:600;font-size:.95rem;color:var(--gray-800);margin-bottom:4px}
+.dest-service-card .ds-desc{font-size:.8rem;color:var(--gray-500);margin-bottom:8px}
+.dest-service-card .ds-cta{display:inline-block;padding:6px 14px;background:var(--cyan-600);color:#fff;border-radius:6px;font-size:.8rem;font-weight:600}
 </style>
 </head>
 <body>
@@ -114,7 +124,8 @@ footer a{color:var(--cyan-400)}
       <div class="info-card"><div class="icon">🛂</div><div class="label">ויזה</div><div class="value">לא נדרש</div></div>
     </div>
 
-    <a href="/" class="cta-btn" onclick="localStorage.setItem('autoDest','BUS')">🔍 חפשו טיסות לבטומי עכשיו</a>
+    <a href="https://www.aviasales.com/?params=TLVBUS1&marker=561903" class="cta-btn" target="_blank" rel="noopener sponsored">🔍 חפשו טיסות לבטומי ב-Aviasales</a>
+    <a href="https://c111.travelpayouts.com/click?shmarker=561903&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fdeep%3Ffrom%3DTLV%26to%3DBUS" class="cta-btn" target="_blank" rel="noopener sponsored" style="background:linear-gradient(135deg,#00a991,#00c9b0);margin-right:8px">🥝 חפשו ב-Kiwi.com</a>
     <a href="https://s.lior-ai.com/lasha" target="_blank" class="cta-btn" style="background:var(--cyan-800);margin-top:8px;display:inline-block">🇬🇪 למדריך בטומי המלא →</a>
 
     <h2>טיסות ישירות לבטומי מנתב״ג</h2>
@@ -127,7 +138,7 @@ footer a{color:var(--cyan-400)}
     <p>בטומי היא יעד קיץ פופולרי לישראלים — חופים יפים, אוכל מצוין ומחירים נמוכים במיוחד. טיסות ישירות בקיץ בלבד (מאי-ספטמבר). בחורף ניתן לטוס עם חיבור דרך איסטנבול. מלון ממוצע: $40-80 ללילה. ארוחה במסעדה: $5-15. הכל הרבה יותר זול מאירופה.</p>
     
     <div class="tip-box">
-      <strong>💡 טיפ לחיסכון:</strong> הזמינו 6-8 שבועות מראש, טוסו בימי שלישי-רביעי, והשוו מחירים במספר מקורות. ב-flights.lior-ai.com תוכלו להשוות ב-6 מקורות בו-זמנית: Google Flights, Skyscanner, Kayak, Walla Tours, Issta ו-Eshet Tours.
+      <strong>💡 טיפ לחיסכון:</strong> הזמינו 6-8 שבועות מראש, טוסו בימי שלישי-רביעי, והשוו מחירים במספר מקורות. ב-flights.lior-ai.com תוכלו להשוות ב-8 מקורות בו-זמנית: Google Flights, Skyscanner, Kayak, Walla Tours, Issta ו-Eshet Tours.
     </div>
 
     <h2>חברות תעופה שטסות לבטומי מנתב״ג</h2>
@@ -139,7 +150,44 @@ footer a{color:var(--cyan-400)}
     <h2>עונה מומלצת לטיסה לבטומי</h2>
     <p>העונה המומלצת ביותר לטוס לבטומי היא מאי-ספט׳. בתקופה זו מזג האוויר נעים, המחירים נמוכים יחסית, ויש פחות תיירים מאשר בשיא הקיץ.</p>
 
-    <a href="/" class="cta-btn">🔍 השוו מחירים לבטומי ב-6 מקורות</a>
+    <a href="/" class="cta-btn">🔍 השוו מחירים לבטומי ב-8 מקורות</a>
+
+    
+    <div class="dest-services">
+      <h2>🌍 שירותי נסיעה לבטומי</h2>
+      <div class="dest-services-grid">
+        <a class="dest-service-card" href="https://www.aviasales.com/?params=TLVBUS1&marker=561903" target="_blank" rel="noopener sponsored">
+          <div class="ds-icon">✈️</div>
+          <div class="ds-name">טיסות ב-Aviasales</div>
+          <div class="ds-desc">השוואת מחירי טיסות לבטומי</div>
+          <span class="ds-cta">חפש טיסות →</span>
+        </a>
+        <a class="dest-service-card" href="https://c111.travelpayouts.com/click?shmarker=561903&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fdeep%3Ffrom%3DTLV%26to%3DBUS" target="_blank" rel="noopener sponsored">
+          <div class="ds-icon">🥝</div>
+          <div class="ds-name">Kiwi.com</div>
+          <div class="ds-desc">שילובי טיסות חכמים לבטומי</div>
+          <span class="ds-cta">גלו דילים →</span>
+        </a>
+        <a class="dest-service-card" href="https://localrent.com/?marker=561903" target="_blank" rel="noopener sponsored">
+          <div class="ds-icon">🚗</div>
+          <div class="ds-name">השכרת רכב</div>
+          <div class="ds-desc">מחירים מקומיים, ביטוח מלא</div>
+          <span class="ds-cta">השוו מחירים →</span>
+        </a>
+        <a class="dest-service-card" href="https://c31.travelpayouts.com/click?shmarker=561903&promo_id=1710&source_type=customlink&type=click&custom_url=https%3A%2F%2Fkiwitaxi.com%2F" target="_blank" rel="noopener sponsored">
+          <div class="ds-icon">🚐</div>
+          <div class="ds-name">שאטל מנמל תעופה</div>
+          <div class="ds-desc">הסעה מהשדה למלון</div>
+          <span class="ds-cta">הזמינו הסעה →</span>
+        </a>
+        <a class="dest-service-card" href="https://c159.travelpayouts.com/click?shmarker=561903&promo_id=4495&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.klook.com%2Fsearch%3Fquery%3DBatumi" target="_blank" rel="noopener sponsored">
+          <div class="ds-icon">🎫</div>
+          <div class="ds-name">טיולים וכרטיסים</div>
+          <div class="ds-desc">אטרקציות וסיורים בבטומי</div>
+          <span class="ds-cta">גלו אטרקציות →</span>
+        </a>
+      </div>
+    </div>
 
     <div class="related">
       <h2>יעדים נוספים מנתב״ג</h2>
@@ -156,6 +204,7 @@ footer a{color:var(--cyan-400)}
 
 <footer>
   <p>✈️ <a href="/">flights.lior-ai.com</a> — השוואת טיסות זולות מנתב״ג | <a href="https://lior-ai.com">Lior AI</a></p>
+  <p style="font-size:.75rem;color:var(--gray-500)">חלק מהקישורים באתר הם קישורי שותפים.</p>
   <p>© 2026 Lior AI. כל הזכויות שמורות.</p>
 </footer>
 <!-- ACCESSIBILITY WIDGET -->
@@ -181,6 +230,16 @@ body.high-contrast{filter:contrast(1.4)}
 body.big-text{font-size:120%}
 body.highlight-links a{outline:2px solid var(--cyan-500)!important;outline-offset:2px}
 body.stop-animations,body.stop-animations *{animation:none!important;transition:none!important}
+
+.dest-services{margin:32px 0;padding:24px 0;border-top:2px solid var(--cyan-100)}
+.dest-services h2{font-size:1.3rem;font-weight:700;color:var(--gray-800);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--cyan-100)}
+.dest-services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.dest-service-card{background:#fff;padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:.2s;text-decoration:none;color:inherit;display:block;border-top:3px solid var(--cyan-400)}
+.dest-service-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.dest-service-card .ds-icon{font-size:1.8rem;margin-bottom:8px}
+.dest-service-card .ds-name{font-weight:600;font-size:.95rem;color:var(--gray-800);margin-bottom:4px}
+.dest-service-card .ds-desc{font-size:.8rem;color:var(--gray-500);margin-bottom:8px}
+.dest-service-card .ds-cta{display:inline-block;padding:6px 14px;background:var(--cyan-600);color:#fff;border-radius:6px;font-size:.8rem;font-weight:600}
 </style>
 <!-- ACCESSIBILITY FAB -->
 <button class="a11y-fab" onclick="toggleA11y()" aria-label="נגישות">♿</button>
