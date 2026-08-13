@@ -145,5 +145,32 @@ footer a{color:#22d3ee}
 </article>
 
 <footer><p>✈️ <a href="/">flights.lior-ai.com</a> | <a href="https://lior-ai.com">Lior AI</a> · © 2026</p></footer>
+<!-- A11Y FAB WIDGET -->
+<div id="a11yWidget">
+<style>
+#a11yFab{position:fixed!important;bottom:20px!important;left:20px!important;width:52px!important;height:52px!important;border-radius:50%!important;background:#6366f1!important;color:#fff!important;border:none!important;cursor:pointer!important;font-size:28px!important;display:flex!important;align-items:center!important;justify-content:center!important;box-shadow:0 4px 14px rgba(0,0,0,0.35)!important;z-index:9999!important;transition:transform .2s!important;padding:0!important;margin:0!important;line-height:1!important}
+#a11yFab:hover{transform:scale(1.1)!important}
+#a11yPanel{display:none;position:fixed;bottom:82px;left:20px;background:#0f172a;color:#e2e8f0;border-radius:14px;padding:20px;box-shadow:0 8px 30px rgba(0,0,0,0.4);z-index:9999;width:250px;font-family:inherit}
+#a11yPanel.show{display:block}
+#a11yPanel h3{font-size:1rem;font-weight:700;margin:0 0 14px 0;color:#fff;display:flex;align-items:center;justify-content:space-between}
+#a11yPanel h3 button{background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1.2rem;padding:0;line-height:1}
+#a11yPanel h3 button:hover{color:#fff}
+#a11yReset{display:block;width:100%;margin-top:12px;padding:8px;background:#1e293b;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:#94a3b8;transition:.2s}
+#a11yReset:hover{background:#334155;color:#fff}
+body.high-contrast{filter:contrast(1.4)}
+body.big-text{font-size:120%}
+body.highlight-links a{outline:2px solid #6366f1!important;outline-offset:2px}
+body.stop-animations,body.stop-animations *{animation:none!important;transition:none!important}
+</style>
+<button id="a11yFab" aria-label="נגישות" onclick="document.getElementById('a11yPanel').classList.toggle('show')">♿</button>
+<div id="a11yPanel">
+  <h3><span>נגישות</span><button onclick="document.getElementById('a11yPanel').classList.remove('show')">✕</button></h3>
+  <div class="a11y-row" onclick="document.body.classList.toggle('big-text');this.querySelector('.a11y-sw').classList.toggle('on')"><span>הגדלת טקסט</span><div class="a11y-sw"></div></div>
+  <div class="a11y-row" onclick="document.body.classList.toggle('high-contrast');this.querySelector('.a11y-sw').classList.toggle('on')"><span>ניגודיות גבוהה</span><div class="a11y-sw"></div></div>
+  <div class="a11y-row" onclick="document.body.classList.toggle('highlight-links');this.querySelector('.a11y-sw').classList.toggle('on')"><span>הדגשת קישורים</span><div class="a11y-sw"></div></div>
+  <div class="a11y-row" onclick="document.body.classList.toggle('stop-animations');this.querySelector('.a11y-sw').classList.toggle('on')"><span>עצירת אנימציות</span><div class="a11y-sw"></div></div>
+  <button id="a11yReset" onclick="['big-text','high-contrast','highlight-links','stop-animations'].forEach(c=>{document.body.classList.remove(c)});document.querySelectorAll('#a11yPanel .a11y-sw').forEach(s=>s.classList.remove('on'))">איפוס</button>
+</div>
+</div>
 </body>
 </html>
