@@ -792,6 +792,20 @@ document.addEventListener('DOMContentLoaded', () => {
   renderGuides();
   renderDeals();
   buildDatalist();
+
+  // UX: auto-open return date picker after selecting departure date
+  const departureInput = document.getElementById('dateOut');
+  const returnInput = document.getElementById('dateIn');
+  departureInput.addEventListener('change', function() {
+    returnInput.min = this.value;
+    if (!returnInput.value || returnInput.value < this.value) {
+      const d = new Date(this.value);
+      d.setDate(d.getDate() + 7);
+      returnInput.value = d.toISOString().split('T')[0];
+    }
+    returnInput.focus();
+    returnInput.showPicker?.();
+  });
 });
 
 // ==== RENDER ====
