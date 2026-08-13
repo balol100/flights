@@ -20,7 +20,7 @@
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="השוואת טיסות זולות מנתב״ג 2026 | חיפוש טיסות חינם">
 <meta property="og:description" content="השוואת טיסות זולות מנתב״ג 2026 — חיפוש חינם ב-Google Flights, Skyscanner, Kayak ועוד. מצאו את הטיסה הזולה ביותר!">
-<meta property="og:image" content="https://fzxoegxuodqbaqzmosda.supabase.co/storage/v1/object/public/lior-ai-assets/og-flights.png">
+<meta property="og:image" content="https://flights.lior-ai.com/og-image.png">
 <meta property="og:url" content="https://flights.lior-ai.com">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
@@ -28,8 +28,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="השוואת טיסות זולות מנתב״ג 2026 | חיפוש טיסות חינם">
 <meta name="twitter:description" content="חיפוש חינם ב-6 מקורות — Google Flights, Skyscanner, Kayak. מצאו טיסות זולות מנתב״ג!">
-<meta name="twitter:image" content="https://fzxoegxuodqbaqzmosda.supabase.co/storage/v1/object/public/lior-ai-assets/og-flights.png">
+<meta name="twitter:image" content="https://flights.lior-ai.com/og-image.png">
 <meta name="theme-color" content="#0ea5e9">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Flights">
 <link rel="alternate" hreflang="he" href="https://flights.lior-ai.com">
 <link rel="alternate" hreflang="en" href="https://flights.lior-ai.com?lang=en">
 <link rel="alternate" hreflang="x-default" href="https://flights.lior-ai.com">
@@ -300,7 +305,7 @@ footer .footer-bottom{border-top:1px solid var(--gray-700);padding-top:16px;font
   "inLanguage": ["he", "en"],
   "browserRequirements": "Requires JavaScript",
   "softwareVersion": "2.0",
-  "screenshot": "https://fzxoegxuodqbaqzmosda.supabase.co/storage/v1/object/public/lior-ai-assets/og-flights.png"
+  "screenshot": "https://flights.lior-ai.com/og-image.png"
 }
 </script>
 
@@ -771,6 +776,22 @@ document.addEventListener('DOMContentLoaded', () => {
   renderGuides();
   renderDeals();
   buildDatalist();
+
+  // === Date picker auto-open: departure → return ===
+  const dateOutEl = document.getElementById('dateOut');
+  const dateInEl = document.getElementById('dateIn');
+  dateOutEl.addEventListener('change', function() {
+    if (this.value && tripType === 'round') {
+      const dep = new Date(this.value);
+      dateInEl.min = this.value;
+      if (!dateInEl.value || new Date(dateInEl.value) <= dep) {
+        const ret = new Date(dep);
+        ret.setDate(ret.getDate() + 7);
+        dateInEl.value = ret.toISOString().split('T')[0];
+      }
+      setTimeout(() => { dateInEl.showPicker ? dateInEl.showPicker() : dateInEl.focus(); }, 100);
+    }
+  });
 });
 
 // ==== RENDER ====

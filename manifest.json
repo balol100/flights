@@ -1,0 +1,18 @@
+{
+  "name": "השוואת טיסות זולות — flights.lior-ai.com",
+  "short_name": "Flights",
+  "description": "השוואת טיסות זולות מנתב״ג — חיפוש חינם ב-6 מקורות",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0ea5e9",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
