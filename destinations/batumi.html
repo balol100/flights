@@ -88,15 +88,43 @@ footer a{color:var(--cyan-400)}
 .related-card .name{font-weight:600;margin-top:4px}
 @media(max-width:768px){.hero h1{font-size:1.4rem}.info-grid{grid-template-columns:1fr 1fr}}
 
-.dest-services{margin:32px 0;padding:24px 0;border-top:2px solid var(--cyan-100)}
-.dest-services h2{font-size:1.3rem;font-weight:700;color:var(--gray-800);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--cyan-100)}
-.dest-services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.dest-service-card{background:#fff;padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:.2s;text-decoration:none;color:inherit;display:block;border-top:3px solid var(--cyan-400)}
-.dest-service-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-.dest-service-card .ds-icon{font-size:1.8rem;margin-bottom:8px}
-.dest-service-card .ds-name{font-weight:600;font-size:.95rem;color:var(--gray-800);margin-bottom:4px}
-.dest-service-card .ds-desc{font-size:.8rem;color:var(--gray-500);margin-bottom:8px}
-.dest-service-card .ds-cta{display:inline-block;padding:6px 14px;background:var(--cyan-600);color:#fff;border-radius:6px;font-size:.8rem;font-weight:600}
+/* ACCESSIBILITY WIDGET */
+.a11y-fab{position:fixed;bottom:20px;left:20px;width:48px;height:48px;border-radius:50%;background:#0e7490;color:#fff;border:none;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.25);z-index:9999;transition:.2s}
+[dir="ltr"] .a11y-fab{left:auto;right:20px}
+.a11y-fab:hover{transform:scale(1.1)}
+.a11y-panel{display:none;position:fixed;bottom:80px;left:20px;background:#fff;border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:9999;width:240px}
+[dir="ltr"] .a11y-panel{left:auto;right:20px}
+.a11y-panel.show{display:block}
+.a11y-panel h3{font-size:1rem;font-weight:700;margin-bottom:12px}
+.a11y-opt{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:.85rem;cursor:pointer}
+.a11y-opt:last-child{border:none}
+.a11y-toggle{width:40px;height:22px;border-radius:11px;background:#e2e8f0;position:relative;transition:.2s}
+.a11y-toggle.on{background:#06b6d4}
+.a11y-toggle::after{content:'';width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;transition:.2s}
+[dir="ltr"] .a11y-toggle::after{right:auto;left:2px}
+.a11y-toggle.on::after{right:20px}
+[dir="ltr"] .a11y-toggle.on::after{right:auto;left:20px}
+.a11y-reset{display:block;width:100%;margin-top:10px;padding:8px;background:#f1f5f9;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:#334155;transition:.2s}
+.a11y-reset:hover{background:#e2e8f0}
+body.high-contrast{filter:contrast(1.4)}
+body.big-text{font-size:120%}
+body.highlight-links a{outline:2px solid #06b6d4!important;outline-offset:2px}
+body.stop-animations,body.stop-animations *{animation:none!important;transition:none!important}
+/* MODAL STYLES */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:16px;padding:32px;max-width:600px;width:90%;max-height:85vh;overflow-y:auto;position:relative;text-align:right}
+.modal h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}
+.modal p{margin-bottom:10px;line-height:1.7;font-size:.95rem;color:#475569}
+.modal-close{position:absolute;top:12px;left:12px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#94a3b8}
+[dir="ltr"] .modal-close{left:auto;right:12px}
+/* AFFILIATE DISCLOSURE */
+.affiliate-disclosure{background:#ecfeff;border:1px solid #a5f3fc;border-radius:8px;padding:8px 14px;font-size:.8rem;color:#155e75;text-align:center;margin:8px 0}
+/* LEGAL FOOTER */
+.legal-footer{background:#0f172a;border-top:1px solid #334155;padding:16px 20px;text-align:center}
+.legal-footer p{font-size:.78rem;color:#94a3b8;max-width:900px;margin:0 auto;line-height:1.7}
+.legal-footer a{color:#22d3ee;text-decoration:underline}
+
 </style>
 </head>
 <body>
@@ -104,6 +132,8 @@ footer a{color:var(--cyan-400)}
   <a href="/" class="logo">✈️ flights.lior-ai.com</a>
   <div><a href="/">חיפוש טיסות</a> &nbsp;|&nbsp; <a href="/blog/">בלוג</a> &nbsp;|&nbsp; <a href="https://lior-ai.com">Lior AI</a></div>
 </div></nav>
+<div class="affiliate-disclosure">אתר זה משתמש בקישורי שותפים. אנו עשויים לקבל עמלה על הזמנות ללא עלות נוספת לכם.</div>
+
 
 <section class="hero">
   <span class="flag">🇬🇪</span>
@@ -124,8 +154,7 @@ footer a{color:var(--cyan-400)}
       <div class="info-card"><div class="icon">🛂</div><div class="label">ויזה</div><div class="value">לא נדרש</div></div>
     </div>
 
-    <a href="https://www.aviasales.com/?params=TLVBUS1&marker=561903" class="cta-btn" target="_blank" rel="noopener sponsored">🔍 חפשו טיסות לבטומי ב-Aviasales</a>
-    <a href="https://c111.travelpayouts.com/click?shmarker=561903&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fdeep%3Ffrom%3DTLV%26to%3DBUS" class="cta-btn" target="_blank" rel="noopener sponsored" style="background:linear-gradient(135deg,#00a991,#00c9b0);margin-right:8px">🥝 חפשו ב-Kiwi.com</a>
+    <a href="/" class="cta-btn" onclick="localStorage.setItem('autoDest','BUS')">🔍 חפשו טיסות לבטומי עכשיו</a>
     <a href="https://s.lior-ai.com/lasha" target="_blank" class="cta-btn" style="background:var(--cyan-800);margin-top:8px;display:inline-block">🇬🇪 למדריך בטומי המלא →</a>
 
     <h2>טיסות ישירות לבטומי מנתב״ג</h2>
@@ -138,7 +167,7 @@ footer a{color:var(--cyan-400)}
     <p>בטומי היא יעד קיץ פופולרי לישראלים — חופים יפים, אוכל מצוין ומחירים נמוכים במיוחד. טיסות ישירות בקיץ בלבד (מאי-ספטמבר). בחורף ניתן לטוס עם חיבור דרך איסטנבול. מלון ממוצע: $40-80 ללילה. ארוחה במסעדה: $5-15. הכל הרבה יותר זול מאירופה.</p>
     
     <div class="tip-box">
-      <strong>💡 טיפ לחיסכון:</strong> הזמינו 6-8 שבועות מראש, טוסו בימי שלישי-רביעי, והשוו מחירים במספר מקורות. ב-flights.lior-ai.com תוכלו להשוות ב-8 מקורות בו-זמנית: Google Flights, Skyscanner, Kayak, Walla Tours, Issta ו-Eshet Tours.
+      <strong>💡 טיפ לחיסכון:</strong> הזמינו 6-8 שבועות מראש, טוסו בימי שלישי-רביעי, והשוו מחירים במספר מקורות. ב-flights.lior-ai.com תוכלו להשוות ב-6 מקורות בו-זמנית: Google Flights, Skyscanner, Kayak, Walla Tours, Issta ו-Eshet Tours.
     </div>
 
     <h2>חברות תעופה שטסות לבטומי מנתב״ג</h2>
@@ -150,44 +179,7 @@ footer a{color:var(--cyan-400)}
     <h2>עונה מומלצת לטיסה לבטומי</h2>
     <p>העונה המומלצת ביותר לטוס לבטומי היא מאי-ספט׳. בתקופה זו מזג האוויר נעים, המחירים נמוכים יחסית, ויש פחות תיירים מאשר בשיא הקיץ.</p>
 
-    <a href="/" class="cta-btn">🔍 השוו מחירים לבטומי ב-8 מקורות</a>
-
-    
-    <div class="dest-services">
-      <h2>🌍 שירותי נסיעה לבטומי</h2>
-      <div class="dest-services-grid">
-        <a class="dest-service-card" href="https://www.aviasales.com/?params=TLVBUS1&marker=561903" target="_blank" rel="noopener sponsored">
-          <div class="ds-icon">✈️</div>
-          <div class="ds-name">טיסות ב-Aviasales</div>
-          <div class="ds-desc">השוואת מחירי טיסות לבטומי</div>
-          <span class="ds-cta">חפש טיסות →</span>
-        </a>
-        <a class="dest-service-card" href="https://c111.travelpayouts.com/click?shmarker=561903&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fdeep%3Ffrom%3DTLV%26to%3DBUS" target="_blank" rel="noopener sponsored">
-          <div class="ds-icon">🥝</div>
-          <div class="ds-name">Kiwi.com</div>
-          <div class="ds-desc">שילובי טיסות חכמים לבטומי</div>
-          <span class="ds-cta">גלו דילים →</span>
-        </a>
-        <a class="dest-service-card" href="https://localrent.com/?marker=561903" target="_blank" rel="noopener sponsored">
-          <div class="ds-icon">🚗</div>
-          <div class="ds-name">השכרת רכב</div>
-          <div class="ds-desc">מחירים מקומיים, ביטוח מלא</div>
-          <span class="ds-cta">השוו מחירים →</span>
-        </a>
-        <a class="dest-service-card" href="https://c31.travelpayouts.com/click?shmarker=561903&promo_id=1710&source_type=customlink&type=click&custom_url=https%3A%2F%2Fkiwitaxi.com%2F" target="_blank" rel="noopener sponsored">
-          <div class="ds-icon">🚐</div>
-          <div class="ds-name">שאטל מנמל תעופה</div>
-          <div class="ds-desc">הסעה מהשדה למלון</div>
-          <span class="ds-cta">הזמינו הסעה →</span>
-        </a>
-        <a class="dest-service-card" href="https://c159.travelpayouts.com/click?shmarker=561903&promo_id=4495&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.klook.com%2Fsearch%3Fquery%3DBatumi" target="_blank" rel="noopener sponsored">
-          <div class="ds-icon">🎫</div>
-          <div class="ds-name">טיולים וכרטיסים</div>
-          <div class="ds-desc">אטרקציות וסיורים בבטומי</div>
-          <span class="ds-cta">גלו אטרקציות →</span>
-        </a>
-      </div>
-    </div>
+    <a href="/" class="cta-btn">🔍 השוו מחירים לבטומי ב-6 מקורות</a>
 
     <div class="related">
       <h2>יעדים נוספים מנתב״ג</h2>
@@ -204,44 +196,64 @@ footer a{color:var(--cyan-400)}
 
 <footer>
   <p>✈️ <a href="/">flights.lior-ai.com</a> — השוואת טיסות זולות מנתב״ג | <a href="https://lior-ai.com">Lior AI</a></p>
-  <p style="font-size:.75rem;color:var(--gray-500)">חלק מהקישורים באתר הם קישורי שותפים.</p>
   <p>© 2026 Lior AI. כל הזכויות שמורות.</p>
+  <div style="margin-top:8px;font-size:.85rem;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="#" onclick="showModal('termsModal');return false" style="color:#22d3ee">תנאי שימוש</a>
+      <a href="#" onclick="showModal('accessibilityModal');return false" style="color:#22d3ee">הצהרת נגישות</a>
+      <a href="#" onclick="showModal('privacyModal');return false" style="color:#22d3ee">מדיניות פרטיות</a>
+    </div>
+  <div class="legal-footer"><p>flights.lior-ai.com הוא אתר השוואת מחירים בלבד ואינו סוכנות נסיעות. איננו מבצעים הזמנות, איננו אחראים על שינויי מחירים או זמינות. ההזמנה מתבצעת ישירות מול חברות התעופה או אתרי ההזמנה. חלק מהקישורים באתר הם קישורי שותפים (affiliate) ואנו עשויים לקבל עמלה ללא עלות נוספת לכם.</p></div>
 </footer>
-<!-- ACCESSIBILITY WIDGET -->
-<style>
-.a11y-fab{position:fixed;bottom:80px;left:20px;width:48px;height:48px;border-radius:50%;background:var(--cyan-700);color:#fff;border:none;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);z-index:90;transition:.2s}
-[dir="ltr"] .a11y-fab{left:auto;right:20px}
-.a11y-fab:hover{transform:scale(1.1)}
-.a11y-panel{display:none;position:fixed;bottom:140px;left:20px;background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-xl);z-index:90;width:240px}
-[dir="ltr"] .a11y-panel{left:auto;right:20px}
-.a11y-panel.show{display:block}
-.a11y-panel h3{font-size:1rem;font-weight:700;margin-bottom:12px}
-.a11y-opt{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:.85rem;cursor:pointer}
-.a11y-opt:last-child{border:none}
-.a11y-toggle{width:40px;height:22px;border-radius:11px;background:var(--gray-200);position:relative;transition:.2s}
-.a11y-toggle.on{background:var(--cyan-500)}
-.a11y-toggle::after{content:'';width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;transition:.2s}
-[dir="ltr"] .a11y-toggle::after{right:auto;left:2px}
-.a11y-toggle.on::after{right:20px}
-[dir="ltr"] .a11y-toggle.on::after{right:auto;left:20px}
-.a11y-reset{display:block;width:100%;margin-top:10px;padding:8px;background:var(--gray-100);border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--gray-700);transition:.2s}
-.a11y-reset:hover{background:var(--gray-200)}
-body.high-contrast{filter:contrast(1.4)}
-body.big-text{font-size:120%}
-body.highlight-links a{outline:2px solid var(--cyan-500)!important;outline-offset:2px}
-body.stop-animations,body.stop-animations *{animation:none!important;transition:none!important}
 
-.dest-services{margin:32px 0;padding:24px 0;border-top:2px solid var(--cyan-100)}
-.dest-services h2{font-size:1.3rem;font-weight:700;color:var(--gray-800);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--cyan-100)}
-.dest-services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.dest-service-card{background:#fff;padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:.2s;text-decoration:none;color:inherit;display:block;border-top:3px solid var(--cyan-400)}
-.dest-service-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-.dest-service-card .ds-icon{font-size:1.8rem;margin-bottom:8px}
-.dest-service-card .ds-name{font-weight:600;font-size:.95rem;color:var(--gray-800);margin-bottom:4px}
-.dest-service-card .ds-desc{font-size:.8rem;color:var(--gray-500);margin-bottom:8px}
-.dest-service-card .ds-cta{display:inline-block;padding:6px 14px;background:var(--cyan-600);color:#fff;border-radius:6px;font-size:.8rem;font-weight:600}
-</style>
-<!-- ACCESSIBILITY FAB -->
+  <div class="a11y-opt" onclick="toggleA11yOpt('high-contrast')"><span>ניגודיות גבוהה</span><div class="a11y-toggle" id="toggle-high-contrast"></div></div>
+  <div class="a11y-opt" onclick="toggleA11yOpt('highlight-links')"><span>הדגש קישורים</span><div class="a11y-toggle" id="toggle-highlight-links"></div></div>
+  <div class="a11y-opt" onclick="toggleA11yOpt('stop-animations')"><span>עצור אנימציות</span><div class="a11y-toggle" id="toggle-stop-animations"></div></div>
+  <button class="a11y-reset" onclick="resetA11y()">איפוס</button>
+</div>
+
+
+<!-- LEGAL MODALS -->
+<div class="modal-overlay" id="termsModal">
+<div class="modal">
+  <button class="modal-close" onclick="hideModal('termsModal')">×</button>
+  <h2>תנאי שימוש — flights.lior-ai.com</h2>
+  <p><strong>עדכון אחרון:</strong> אוגוסט 2026</p>
+  <p>אתר flights.lior-ai.com הוא אתר השוואת מחירי טיסות בלבד, <strong>ואינו סוכנות נסיעות</strong>. האתר אינו מבצע הזמנות, אינו מנפיק כרטיסי טיסה ואינו צד לכל עסקה.</p>
+  <p>אנחנו לא אחראים על הזמנות, ביטולים, שינויים או כל עניין הקשור לטיסה שנרכשה דרך אתרי צד שלישי. כל הזמנה מתבצעת ישירות מול חברת התעופה או אתר ההזמנה.</p>
+  <p>מחירים המוצגים באתר מגיעים ממקורות חיצוניים (Google Flights, Skyscanner, Kayak ועוד) ועשויים להשתנות בכל רגע. אנו לא מתחייבים לדיוק או עדכניות המחירים.</p>
+  <p>חלק מהקישורים באתר הם קישורי שותפים (affiliate). אנו עשויים לקבל עמלה מאתרי הזמנה כאשר משתמשים לוחצים על קישור ומבצעים רכישה — <strong>ללא כל עלות נוספת למשתמש</strong>.</p>
+  <p>השירות הוא חינמי לחלוטין. השימוש באתר מהווה הסכמה לתנאים אלה.</p>
+  <p>יצירת קשר: <a href="mailto:liorbll100@gmail.com">liorbll100@gmail.com</a></p>
+</div>
+</div>
+
+<div class="modal-overlay" id="accessibilityModal">
+<div class="modal">
+  <button class="modal-close" onclick="hideModal('accessibilityModal')">×</button>
+  <h2>הצהרת נגישות — flights.lior-ai.com</h2>
+  <p><strong>עדכון אחרון:</strong> אוגוסט 2026</p>
+  <p>אתר flights.lior-ai.com הוא אתר להשוואת מחירי טיסות מנתב״ג. האתר כולל טופס חיפוש טיסות, דפי יעדים עם מידע על טיסות, ומאמרי בלוג עם טיפים לחיסכון.</p>
+  <p>אנו שואפים להנגיש את האתר לכלל האוכלוסייה, לרבות אנשים עם מוגבלויות, בהתאם לתקן הישראלי (ת"י 5568) ולהנחיות WCAG 2.1 ברמת AA.</p>
+  <p>התאמות נגישות: ווידג'ט נגישות (הגדלת גופן, ניגודיות גבוהה, הדגשת קישורים, עצירת אנימציות), תמיכה בניווט מקלדת, תאימות לקוראי מסך, תמיכה ב-RTL/LTR, תצוגה רספונסיבית למכשירים ניידים.</p>
+  <p>נתקלתם בבעיית נגישות? נשמח לשמוע ולתקן: <a href="mailto:liorbll100@gmail.com">liorbll100@gmail.com</a></p>
+</div>
+</div>
+
+<div class="modal-overlay" id="privacyModal">
+<div class="modal">
+  <button class="modal-close" onclick="hideModal('privacyModal')">×</button>
+  <h2>מדיניות פרטיות — flights.lior-ai.com</h2>
+  <p><strong>עדכון אחרון:</strong> אוגוסט 2026</p>
+  <p>אנו אוספים כתובת אימייל רק כאשר המשתמש נרשם להתראות טיסות. האימייל משמש אך ורק לשליחת עדכונים על דילי טיסות.</p>
+  <p>באתר מותקן סקריפט Travelpayouts Drive לצורכי מעקב שותפים (affiliate cookie tracking). סקריפט זה מאפשר לנו לקבל עמלה כאשר משתמשים מבצעים הזמנה דרך קישורי שותפים באתר.</p>
+  <p>אנו לא משתפים מידע אישי עם צד שלישי מעבר לשותפים העסקיים (Travelpayouts / Skyscanner) הנדרשים לצורך מעקב עמלות.</p>
+  <p>ביטול הרשמה (unsubscribe) אפשרי בקליק אחד דרך הקישור בכל אימייל שנשלח.</p>
+  <p>לשאלות בנושא פרטיות: <a href="mailto:liorbll100@gmail.com">liorbll100@gmail.com</a></p>
+</div>
+</div>
+
+
+<!-- ACCESSIBILITY WIDGET (INLINE) -->
 <button class="a11y-fab" onclick="toggleA11y()" aria-label="נגישות">♿</button>
 <div class="a11y-panel" id="a11yPanel">
   <h3>נגישות</h3>
@@ -251,11 +263,16 @@ body.stop-animations,body.stop-animations *{animation:none!important;transition:
   <div class="a11y-opt" onclick="toggleA11yOpt('stop-animations')"><span>עצור אנימציות</span><div class="a11y-toggle" id="toggle-stop-animations"></div></div>
   <button class="a11y-reset" onclick="resetA11y()">איפוס</button>
 </div>
+
+
 <script>
-// ==== ACCESSIBILITY ====
 function toggleA11y(){document.getElementById('a11yPanel').classList.toggle('show')}
 function toggleA11yOpt(cls){document.body.classList.toggle(cls);var t=document.getElementById('toggle-'+cls);if(t)t.classList.toggle('on')}
 function resetA11y(){['big-text','high-contrast','highlight-links','stop-animations'].forEach(function(c){document.body.classList.remove(c);var t=document.getElementById('toggle-'+c);if(t)t.classList.remove('on')})}
+function showModal(id){document.getElementById(id).classList.add('show')}
+function hideModal(id){document.getElementById(id).classList.remove('show')}
+document.querySelectorAll('.modal-overlay').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('show')})});
 </script>
+
 </body>
 </html>
