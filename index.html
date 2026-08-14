@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<script data-noptimize="1" data-cfasync="false" data-no-defer="1" data-cmp-ab="2">
-  (function () {
-      var script = document.createElement("script");
-      script.async = 1;
-      script.setAttribute("data-cmp-ab","2");
-      script.src = "https://emrld.ltd/NTYxOTAz.js?t=561903";
-      document.head.appendChild(script);
-  })();
-</script>
 <meta charset="UTF-8">
 <meta name='impact-site-verification' value='20190177-42f1-4163-ab02-38da359294f9'>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -20,7 +11,7 @@
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="השוואת טיסות זולות מנתב״ג 2026 | חיפוש טיסות חינם">
 <meta property="og:description" content="השוואת טיסות זולות מנתב״ג 2026 — חיפוש חינם ב-Google Flights, Skyscanner, Kayak ועוד. מצאו את הטיסה הזולה ביותר!">
-<meta property="og:image" content="https://flights.lior-ai.com/og-image.png">
+<meta property="og:image" content="https://fzxoegxuodqbaqzmosda.supabase.co/storage/v1/object/public/lior-ai-assets/og-flights.png">
 <meta property="og:url" content="https://flights.lior-ai.com">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
@@ -28,13 +19,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="השוואת טיסות זולות מנתב״ג 2026 | חיפוש טיסות חינם">
 <meta name="twitter:description" content="חיפוש חינם ב-6 מקורות — Google Flights, Skyscanner, Kayak. מצאו טיסות זולות מנתב״ג!">
-<meta name="twitter:image" content="https://flights.lior-ai.com/og-image.png">
+<meta name="twitter:image" content="https://fzxoegxuodqbaqzmosda.supabase.co/storage/v1/object/public/lior-ai-assets/og-flights.png">
 <meta name="theme-color" content="#0ea5e9">
-<link rel="manifest" href="/manifest.json">
-<link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Flights">
 <link rel="alternate" hreflang="he" href="https://flights.lior-ai.com">
 <link rel="alternate" hreflang="en" href="https://flights.lior-ai.com?lang=en">
 <link rel="alternate" hreflang="x-default" href="https://flights.lior-ai.com">
@@ -279,6 +265,29 @@ footer .footer-bottom{border-top:1px solid var(--gray-700);padding-top:16px;font
   footer .footer-inner{flex-direction:column;align-items:center;text-align:center}
 }
 
+/* ACCESSIBILITY WIDGET */
+.a11y-fab{position:fixed;bottom:80px;left:20px;width:48px;height:48px;border-radius:50%;background:var(--cyan-700);color:#fff;border:none;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);z-index:90;transition:.2s}
+[dir="ltr"] .a11y-fab{left:auto;right:20px}
+.a11y-fab:hover{transform:scale(1.1)}
+.a11y-panel{display:none;position:fixed;bottom:140px;left:20px;background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-xl);z-index:90;width:240px}
+[dir="ltr"] .a11y-panel{left:auto;right:20px}
+.a11y-panel.show{display:block}
+.a11y-panel h3{font-size:1rem;font-weight:700;margin-bottom:12px}
+.a11y-opt{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:.85rem;cursor:pointer}
+.a11y-opt:last-child{border:none}
+.a11y-toggle{width:40px;height:22px;border-radius:11px;background:var(--gray-200);position:relative;transition:.2s}
+.a11y-toggle.on{background:var(--cyan-500)}
+.a11y-toggle::after{content:'';width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px;transition:.2s}
+[dir="ltr"] .a11y-toggle::after{right:auto;left:2px}
+.a11y-toggle.on::after{right:20px}
+[dir="ltr"] .a11y-toggle.on::after{right:auto;left:20px}
+.a11y-reset{display:block;width:100%;margin-top:10px;padding:8px;background:var(--gray-100);border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--gray-700);transition:.2s}
+.a11y-reset:hover{background:var(--gray-200)}
+
+body.high-contrast{filter:contrast(1.4)}
+body.big-text{font-size:120%}
+body.highlight-links a{outline:2px solid var(--cyan-500)!important;outline-offset:2px}
+body.stop-animations,body.stop-animations *{animation:none!important;transition:none!important}
 </style>
 
 <!-- Structured Data: WebApplication -->
@@ -305,7 +314,7 @@ footer .footer-bottom{border-top:1px solid var(--gray-700);padding-top:16px;font
   "inLanguage": ["he", "en"],
   "browserRequirements": "Requires JavaScript",
   "softwareVersion": "2.0",
-  "screenshot": "https://flights.lior-ai.com/og-image.png"
+  "screenshot": "https://fzxoegxuodqbaqzmosda.supabase.co/storage/v1/object/public/lior-ai-assets/og-flights.png"
 }
 </script>
 
@@ -620,6 +629,7 @@ footer .footer-bottom{border-top:1px solid var(--gray-700);padding-top:16px;font
       <div style="font-size:.85rem" data-he="חיפוש טיסות חכם מישראל" data-en="Smart flight search from Israel">חיפוש טיסות חכם מישראל</div>
     </div>
     <div class="footer-links">
+      <a href="#" onclick="showModal('accessibilityModal');return false" data-he="נגישות" data-en="Accessibility">נגישות</a>
       <a href="#" onclick="showModal('termsModal');return false" data-he="תנאי שימוש" data-en="Terms">תנאי שימוש</a>
       <a href="#faq" data-he="שאלות נפוצות" data-en="FAQ">שאלות נפוצות</a>
       <a href="/destinations/athens.html">טיסות לאתונה</a>
@@ -634,7 +644,28 @@ footer .footer-bottom{border-top:1px solid var(--gray-700);padding-top:16px;font
 </div>
 </footer>
 
+<!-- ACCESSIBILITY FAB -->
+<button class="a11y-fab" onclick="toggleA11y()" aria-label="נגישות">♿</button>
+<div class="a11y-panel" id="a11yPanel">
+  <h3>נגישות</h3>
+  <div class="a11y-opt" onclick="toggleA11yOpt('big-text')"><span>הגדל גופן</span><div class="a11y-toggle" id="toggle-big-text"></div></div>
+  <div class="a11y-opt" onclick="toggleA11yOpt('high-contrast')"><span>ניגודיות גבוהה</span><div class="a11y-toggle" id="toggle-high-contrast"></div></div>
+  <div class="a11y-opt" onclick="toggleA11yOpt('highlight-links')"><span>הדגש קישורים</span><div class="a11y-toggle" id="toggle-highlight-links"></div></div>
+  <div class="a11y-opt" onclick="toggleA11yOpt('stop-animations')"><span>עצור אנימציות</span><div class="a11y-toggle" id="toggle-stop-animations"></div></div>
+  <button class="a11y-reset" onclick="resetA11y()">איפוס</button>
+</div>
+
 <!-- MODALS -->
+<div class="modal-overlay" id="accessibilityModal">
+<div class="modal">
+  <button class="modal-close" onclick="hideModal('accessibilityModal')">×</button>
+  <h2>הצהרת נגישות — flights.lior-ai.com</h2>
+  <p><strong>עדכון אחרון:</strong> אוגוסט 2026</p><br>
+  <p>אתר flights.lior-ai.com הוא כלי חיפוש טיסות חינמי שפותח ומתוחזק על ידי Lior AI (ליאור בלול). אנו שואפים להנגיש את הכלי לכלל האוכלוסייה בהתאם לתקן הישראלי (ת"י 5568) ולהנחיות WCAG 2.1 ברמת AA.</p><br>
+  <p>התאמות: תמיכה בניווט מקלדת, קוראי מסך, ניגודיות מותאמת, הגדלת טקסט, ווידג'ט נגישות, RTL/LTR, מכשירים ניידים.</p><br>
+  <p>פנייה בנושא נגישות: <a href="/cdn-cgi/l/email-protection#600c090f12020c0c51505020070d01090c4e030f0d"><span class="__cf_email__" data-cfemail="305c595f42525c5c01000070575d51595c1e535f5d">[email&#160;protected]</span></a> | <a href="https://lior-ai.com/contact">lior-ai.com/contact</a></p>
+</div>
+</div>
 <div class="modal-overlay" id="termsModal">
 <div class="modal">
   <button class="modal-close" onclick="hideModal('termsModal')">×</button>
@@ -776,22 +807,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderGuides();
   renderDeals();
   buildDatalist();
-
-  // === Date picker auto-open: departure → return ===
-  const dateOutEl = document.getElementById('dateOut');
-  const dateInEl = document.getElementById('dateIn');
-  dateOutEl.addEventListener('change', function() {
-    if (this.value && tripType === 'round') {
-      const dep = new Date(this.value);
-      dateInEl.min = this.value;
-      if (!dateInEl.value || new Date(dateInEl.value) <= dep) {
-        const ret = new Date(dep);
-        ret.setDate(ret.getDate() + 7);
-        dateInEl.value = ret.toISOString().split('T')[0];
-      }
-      setTimeout(() => { dateInEl.showPicker ? dateInEl.showPicker() : dateInEl.focus(); }, 100);
-    }
-  });
 });
 
 // ==== RENDER ====
@@ -878,6 +893,42 @@ function buildDatalist() {
     o.textContent = `${d.flag} ${d.he} / ${d.en} (${d.code})`;
     dl.appendChild(o);
   });
+}
+
+// ==== IATA RESOLVER ====
+// Build flat lookup: Hebrew name, English name, code → IATA code
+const _iataLookup = {};
+Object.values(DESTINATIONS).flat().forEach(d => {
+  _iataLookup[d.code.toUpperCase()] = d.code;
+  _iataLookup[d.he] = d.code;
+  _iataLookup[d.en.toUpperCase()] = d.code;
+});
+// Also add common country-level Hebrew names → main airport
+const _countryAliases = {
+  'יוון':'ATH','אנגליה':'LHR','בריטניה':'LHR','צרפת':'CDG','גרמניה':'BER',
+  'איטליה':'FCO','ספרד':'BCN','הולנד':'AMS','צ\'כיה':'PRG','אוסטריה':'VIE',
+  'הונגריה':'BUD','טורקיה':'IST','קפריסין':'LCA','שוויץ':'ZRH','בלגיה':'BRU',
+  'אירלנד':'DUB','פורטוגל':'LIS','פולין':'WAW','רומניה':'OTP','בולגריה':'SOF',
+  'סרביה':'BEG','תאילנד':'BKK','גאורגיה':'TBS','מרוקו':'RAK','ירדן':'AMM',
+  'מצרים':'CAI','אמירויות':'DXB','יפן':'NRT','הודו':'DEL','קנדה':'YYZ',
+  'מקסיקו':'MEX','ארה\"ב':'JFK','אמריקה':'JFK'
+};
+Object.entries(_countryAliases).forEach(([k,v]) => { _iataLookup[k] = v; });
+
+function resolveToIATA(input) {
+  if (!input) return '';
+  const trimmed = input.trim();
+  // Direct IATA code (3 uppercase letters)
+  if (/^[A-Z]{3}$/.test(trimmed) && _iataLookup[trimmed]) return trimmed;
+  // Lookup by Hebrew or English name
+  if (_iataLookup[trimmed]) return _iataLookup[trimmed];
+  if (_iataLookup[trimmed.toUpperCase()]) return _iataLookup[trimmed.toUpperCase()];
+  // Partial match — find first destination whose he or en name contains input
+  const lower = trimmed.toLowerCase();
+  const match = Object.values(DESTINATIONS).flat().find(d =>
+    d.he.includes(trimmed) || d.en.toLowerCase().includes(lower)
+  );
+  return match ? match.code : trimmed.toUpperCase(); // fallback: return as-is
 }
 
 // ==== ACTIONS ====
@@ -998,8 +1049,9 @@ function renderFlightCard(flight, idx) {
 }
 
 async function doSearch() {
-  const origin = document.getElementById('origin').value.trim().toUpperCase();
-  const dest = document.getElementById('dest').value.trim().toUpperCase();
+  const origin = resolveToIATA(document.getElementById('origin').value) || 'TLV';
+  const destRaw = document.getElementById('dest').value.trim();
+  const dest = resolveToIATA(destRaw);
   const dateOut = document.getElementById('dateOut').value;
   const dateIn = document.getElementById('dateIn').value;
   const pax = document.getElementById('pax').value;
@@ -1007,6 +1059,7 @@ async function doSearch() {
   const isHe = lang === 'he';
 
   if (!dest) { alert(isHe?'אנא בחרו יעד':'Please select a destination'); return; }
+  if (!/^[A-Z]{3}$/.test(dest)) { alert(isHe?'יעד לא מזוהה — בחרו מהרשימה או הקלידו קוד שדה תעופה (למשל ATH)':'Destination not recognized — pick from the list or type an airport code (e.g. ATH)'); return; }
   if (!dateOut) { alert(isHe?'אנא בחרו תאריך יציאה':'Please select departure date'); return; }
   if (tripType === 'round' && !dateIn) { alert(isHe?'אנא בחרו תאריך חזרה':'Please select return date'); return; }
 
@@ -1132,7 +1185,10 @@ document.querySelectorAll('.modal-overlay').forEach(m => {
   m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); });
 });
 
+// ==== ACCESSIBILITY ====
+function toggleA11y(){document.getElementById('a11yPanel').classList.toggle('show')}
+function toggleA11yOpt(cls){document.body.classList.toggle(cls);var t=document.getElementById('toggle-'+cls);if(t)t.classList.toggle('on')}
+function resetA11y(){['big-text','high-contrast','highlight-links','stop-animations'].forEach(function(c){document.body.classList.remove(c);var t=document.getElementById('toggle-'+c);if(t)t.classList.remove('on')})}
 </script>
-<script src="https://lior-ai-tools.netlify.app/ai-accessibility.js"></script>
 </body>
 </html>
