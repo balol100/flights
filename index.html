@@ -797,6 +797,32 @@ let tripType = 'round';
 
 // ==== INIT ====
 document.addEventListener('DOMContentLoaded', () => {
+  // Detect ?lang=en URL parameter for English version
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlLang = urlParams.get('lang');
+  if (urlLang === 'en' && lang !== 'en') {
+    lang = 'en';
+    document.documentElement.dir = 'ltr';
+    document.documentElement.lang = 'en';
+    document.getElementById('langBtn').textContent = 'עברית';
+    // Update meta tags for English
+    document.title = 'Compare Cheap Flights from TLV 2026 | Free Flight Search — flights.lior-ai.com';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.content = 'Compare cheap flights from TLV 2026 — free search across Google Flights, Skyscanner, Kayak & more. Find the cheapest flight from Israel!';
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.href = 'https://flights.lior-ai.com?lang=en';
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.content = 'Compare Cheap Flights from TLV 2026 | Free Flight Search';
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.content = 'Compare cheap flights from TLV 2026 — free search across Google Flights, Skyscanner, Kayak & more.';
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.content = 'https://flights.lior-ai.com?lang=en';
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.content = 'en_US';
+    document.querySelectorAll('[data-he][data-en]').forEach(el => {
+      el.textContent = el.getAttribute('data-en');
+    });
+  }
   const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 7);
   const ret = new Date(tomorrow); ret.setDate(ret.getDate() + 7);
   document.getElementById('dateOut').value = tomorrow.toISOString().split('T')[0];
@@ -995,27 +1021,40 @@ function formatTime(t) {
 
 function renderFlightCard(flight, idx) {
   const isHe = lang === 'he';
-  const seg = flight.segments && flight.segments[0];
   const isBest = idx < 3;
-  const stopsText = flight.stops === 0 ? (isHe ? 'ישיר' : 'Direct') :
-    flight.stops === 1 ? (isHe ? 'עצירה אחת' : '1 Stop') :
-    `${flight.stops} ${isHe ? 'עצירות' : 'Stops'}`;
-  const stopsClass = flight.stops === 0 ? 'color:var(--cyan-600)' : 'color:var(--gray-500)';
 
-  const airlineName = flight.airlines ? flight.airlines.join(', ') : 'Unknown';
+  // Support both Edge Function fields (transfers/airline/link) and legacy fields (stops/airlines/booking_url)
+  const stops = flight.transfers ?? flight.stops ?? 0;
+  const stopsText = stops === 0 ? (isHe ? 'ישיר' : 'Direct') :
+    stops === 1 ? (isHe ? 'עצירה אחת' : '1 Stop') :
+    `${stops} ${isHe ? 'עצירות' : 'Stops'}`;
+  const stopsClass = stops === 0 ? 'color:var(--cyan-600)' : 'color:var(--gray-500)';
+
+  const airlineName = flight.airlines ? flight.airlines.join(', ') : (flight.airline || 'Unknown');
   const initials = airlineName.substring(0, 2).toUpperCase();
 
-  let depTime = '--:--', arrTime = '--:--', depCode = '???', arrCode = '???', duration = '';
+  // Extract times and codes from segments or top-level fields
+  const seg = flight.segments && flight.segments[0];
+  let depTime = '--:--', arrTime = '--:--';
+  const depCode = flight.origin || (seg && seg.from?.code) || '???';
+  const arrCode = flight.destination || (seg && seg.to?.code) || '???';
   if (seg) {
     depTime = formatTime(seg.departure || '--:--');
     arrTime = formatTime(seg.arrival || '--:--');
-    depCode = seg.from?.code || '???';
-    arrCode = seg.to?.code || '???';
+  } else if (flight.departure_at) {
+    depTime = flight.departure_at.substring(11, 16) || '--:--';
   }
-  duration = flight.total_duration ? formatDuration(flight.total_duration) : (seg ? formatDuration(seg.duration || 0) : '');
+  const duration = flight.duration_to ? formatDuration(flight.duration_to) :
+    (flight.total_duration ? formatDuration(flight.total_duration) :
+    (seg ? formatDuration(seg.duration || 0) : ''));
 
-  const bookUrl = flight.booking_url || `https://www.google.com/travel/flights?q=Flights+from+${depCode}+to+${arrCode}&curr=ILS&hl=he`;
+  // Use the Aviasales link from the Edge Function, or build a Google Flights fallback with dates
+  const dateOut = document.getElementById('dateOut')?.value || '';
+  const dateIn = document.getElementById('dateIn')?.value || '';
+  const bookUrl = flight.link || flight.booking_url ||
+    `https://www.google.com/travel/flights?q=Flights+from+${depCode}+to+${arrCode}+on+${dateOut}${tripType==='round'&&dateIn?'+return+'+dateIn:''}&curr=ILS&hl=${isHe?'he':'en'}&gl=il`;
   const priceDisplay = flight.price > 0 ? `<span class="currency">${flight.currency === 'ILS' ? '₪' : '$'}</span>${flight.price.toLocaleString()}` : (isHe ? 'ראו מחיר' : 'See price');
+  const priceLabel = tripType === 'round' ? (isHe ? 'הלוך ושוב' : 'Round trip') : (isHe ? 'כיוון אחד' : 'One way');
 
   return `
     <div class="flight-card${isBest ? ' best' : ''}">
@@ -1043,6 +1082,7 @@ function renderFlightCard(flight, idx) {
       </div>
       <div class="flight-price-col">
         <div class="flight-price">${priceDisplay}</div>
+        <div style="font-size:.75rem;color:var(--gray-500);margin-top:2px">${priceLabel}</div>
         <a class="flight-book-btn" href="${bookUrl}" target="_blank" rel="noopener">${isHe ? 'הזמן' : 'Book'} →</a>
       </div>
     </div>`;
@@ -1166,6 +1206,15 @@ function toggleLang() {
   document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
   document.documentElement.lang = lang;
   document.getElementById('langBtn').textContent = lang === 'he' ? 'English' : 'עברית';
+
+  // Update URL to reflect language
+  const url = new URL(window.location);
+  if (lang === 'en') {
+    url.searchParams.set('lang', 'en');
+  } else {
+    url.searchParams.delete('lang');
+  }
+  window.history.replaceState({}, '', url);
 
   document.querySelectorAll('[data-he][data-en]').forEach(el => {
     el.textContent = el.getAttribute(`data-${lang}`);
