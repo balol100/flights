@@ -1,0 +1,45 @@
+/* travel-deals.css — Travelpayouts monetization blocks (flights / hotels / eSIM)
+   Matches the site cyan+gray light theme. RTL-first. */
+.td-section{margin:40px 0 0}
+/* injected before the footer on pages with no shared content wrapper (blog articles
+   use .article, not .container) — supply our own width so it never goes full-bleed */
+.td-section.td-standalone{max-width:800px;margin:40px auto;padding:0 20px}
+.td-block{background:#fff;border:1px solid var(--gray-200,#e2e8f0);border-radius:var(--radius,12px);padding:20px;margin:20px 0;box-shadow:var(--shadow,0 4px 6px -1px rgb(0 0 0/.1))}
+.td-block h2,.td-block h3{margin:0 0 4px;border:none;padding:0}
+.td-title{font-size:1.25rem;font-weight:800;color:var(--gray-800,#1e293b);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.td-sub{font-size:.88rem;color:var(--gray-500,#64748b);margin:0 0 14px}
+.td-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;align-items:end}
+.td-field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.td-field label{font-size:.78rem;font-weight:600;color:var(--gray-600,#475569)}
+.td-field input,.td-field select{width:100%;padding:10px 12px;border:1px solid var(--gray-300,#cbd5e1);border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--gray-800,#1e293b);background:#fff}
+.td-field input:focus,.td-field select:focus{outline:2px solid var(--cyan-400,#22d3ee);outline-offset:-1px;border-color:transparent}
+.td-btn{display:block;width:100%;text-align:center;padding:15px 24px;border:none;border-radius:var(--radius,12px);font-family:inherit;font-weight:800;font-size:1.05rem;color:#fff;cursor:pointer;transition:.2s;line-height:1.3}
+.td-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg,0 10px 15px -3px rgb(0 0 0/.1))}
+.td-btn-flights{background:linear-gradient(135deg,#1c8ce3,#00a6ff);margin-top:16px}
+.td-btn-hotels{background:linear-gradient(135deg,#e8422f,#ff6b4a);margin-top:16px}
+.td-note{font-size:.78rem;color:var(--gray-400,#94a3b8);margin-top:10px;text-align:center}
+/* Primary (paying) source card */
+.td-primary{border:2px solid #00a6ff;background:linear-gradient(135deg,#f0f9ff,#fff);position:relative;overflow:hidden}
+.td-primary-badge{position:absolute;top:0;inset-inline-start:0;background:linear-gradient(135deg,#1c8ce3,#00a6ff);color:#fff;font-size:.72rem;font-weight:700;padding:4px 14px;border-end-end-radius:10px}
+.td-brand{display:flex;align-items:center;gap:12px;margin:14px 0 4px}
+.td-brand-mark{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#1c8ce3,#00a6ff);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.35rem;flex:none}
+.td-brand-name{font-weight:800;font-size:1.1rem;color:var(--gray-800,#1e293b)}
+.td-brand-desc{font-size:.82rem;color:var(--gray-500,#64748b)}
+/* Secondary sources */
+.td-secondary-title{font-size:.95rem;font-weight:700;color:var(--gray-600,#475569);margin:24px 0 10px}
+.td-esim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.td-card{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--gray-200,#e2e8f0);border-radius:10px;background:#fff;transition:.2s;text-decoration:none;color:inherit}
+.td-card:hover{border-color:var(--cyan-400,#22d3ee);transform:translateY(-2px);box-shadow:var(--shadow,0 4px 6px -1px rgb(0 0 0/.1))}
+.td-card .td-ico{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex:none;background:var(--cyan-50,#ecfeff)}
+.td-card .td-nm{font-weight:700;font-size:.94rem}
+.td-card .td-ds{font-size:.78rem;color:var(--gray-500,#64748b)}
+/* Affiliate disclosure */
+.td-disclosure{max-width:900px;margin:28px auto 0;padding:14px 20px;font-size:.82rem;line-height:1.7;color:var(--gray-500,#64748b);background:var(--gray-100,#f1f5f9);border:1px solid var(--gray-200,#e2e8f0);border-radius:10px;text-align:center}
+footer .td-disclosure{background:transparent;border:none;color:var(--gray-400,#94a3b8);margin-top:10px}
+@media(max-width:600px){.td-form{grid-template-columns:1fr 1fr}.td-block{padding:16px}.td-title{font-size:1.1rem}}
+/* Primary source rendered as a link (search results panel) */
+.td-primary-link{display:block;text-decoration:none;color:inherit}
+.td-primary-link:hover{box-shadow:var(--shadow-lg,0 10px 15px -3px rgb(0 0 0/.1))}
+.td-brand,.td-brand>span{display:flex}
+.td-brand>span{flex-direction:column;justify-content:center;min-width:0}
+.td-brand-name,.td-brand-desc{display:block}
