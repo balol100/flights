@@ -32,3 +32,11 @@
   for = "/llms.txt"
   [headers.values]
     Content-Type = "text/plain"
+
+# The shared monetization scripts carry the affiliate marker, so a stale copy in a
+# returning visitor's cache means unattributed clicks. These are two small files —
+# revalidate every load (304s are cheap) rather than serving them for 4 hours.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
