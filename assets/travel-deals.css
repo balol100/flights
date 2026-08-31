@@ -48,11 +48,31 @@ footer .td-disclosure{background:transparent;border:none;color:var(--gray-400,#9
    contrast against the light page makes the offer read as an offer, not as body copy. */
 .gc-block{background:linear-gradient(150deg,#141a2e 0%,#1e2545 55%,#2a1f4d 100%);border:1px solid #2f3a63;color:#e8ecf7}
 .gc-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-.gc-logo{font-weight:800;font-size:1.05rem;letter-spacing:.02em;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:4px 12px;border-radius:8px}
-.gc-tag{font-size:.78rem;color:#9fb0d8}
-.gc-promo{display:inline-block;background:linear-gradient(135deg,#f5a524,#ff7a45);color:#20160a;font-weight:800;font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:10px}
-.gc-title{font-size:1.18rem;font-weight:800;color:#fff;line-height:1.45;margin-bottom:6px}
-.gc-sub{font-size:.9rem;color:#b9c5e4;margin-bottom:4px}
+.gc-block .gc-logo{font-weight:800;font-size:1.05rem;letter-spacing:.02em;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:4px 12px;border-radius:8px}
+.gc-block .gc-tag{font-size:.78rem;color:#9fb0d8}
+.gc-block .gc-promo{display:inline-block;background:linear-gradient(135deg,#f5a524,#ff7a45);color:#20160a;font-weight:800;font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:10px}
+.gc-block .gc-title{font-size:1.18rem;font-weight:800;color:#fff;line-height:1.45;margin-bottom:6px}
+.gc-block .gc-sub{font-size:.9rem;color:#b9c5e4;margin-bottom:4px}
 .gc-btn{background:linear-gradient(135deg,#7b5cff,#a855f7);margin-top:16px;color:#fff}
 .gc-btn:hover{box-shadow:0 10px 22px -6px rgba(123,92,255,.55)}
-.gc-note{color:#8595bd !important}
+.gc-block .gc-note{color:#8595bd !important}
+
+/* ---- AirHelp: the highest-margin placement on the site, so it is deliberately the
+   loudest block — deep blue against the page's cyan, with an amber CTA. */
+.ah-block{background:linear-gradient(145deg,#0a2a63 0%,#123f95 55%,#1657c4 100%);border:1px solid #2a5bb5;color:#eaf1ff}
+.ah-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.ah-block .ah-logo{font-weight:800;font-size:1.05rem;color:#0a2a63;background:#fff;padding:4px 12px;border-radius:8px}
+.ah-block .ah-tag{font-size:.78rem;color:#a8c3f0}
+.ah-block .ah-promo{display:inline-block;background:linear-gradient(135deg,#ffd166,#ffb020);color:#3a2600;font-weight:800;font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:10px}
+.ah-block .ah-title{font-size:1.25rem;font-weight:800;color:#fff;line-height:1.45;margin-bottom:6px}
+.ah-block .ah-sub{font-size:.92rem;color:#d8e6fc;margin-bottom:10px}
+.ah-list{list-style:none;margin:0 0 4px;padding:0;display:grid;gap:6px}
+.ah-block .ah-list li{font-size:.88rem;color:#e6efff;padding-inline-start:22px;position:relative}
+.ah-block .ah-list li::before{content:"\2713";position:absolute;inset-inline-start:0;color:#7ee0a6;font-weight:800}
+.ah-btn{background:linear-gradient(135deg,#ffb020,#ff8a3d);color:#2b1a00;margin-top:16px;font-size:1.1rem}
+.ah-btn:hover{box-shadow:0 10px 22px -6px rgba(255,150,40,.55)}
+.ah-block .ah-note{color:#93aeda !important}
+/* compact variant used on destination pages */
+.ah-block.ah-compact .ah-title{font-size:1.08rem}
+.ah-block.ah-compact .ah-sub{font-size:.88rem;margin-bottom:8px}
+.ah-block.ah-compact .ah-btn{font-size:1rem;margin-top:12px}

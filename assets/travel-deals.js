@@ -33,6 +33,7 @@
   var cityHe = meta('tp-city-he', cityEn);
   var esimC  = meta('tp-esim');
   var goCity = meta('tp-gocity');
+  var airHelpVariant = meta('tp-airhelp', 'full');
   var blocks = meta('tp-blocks', 'hotels,esim').split(',').map(function (s) { return s.trim(); });
   var has    = function (b) { return blocks.indexOf(b) !== -1; };
 
@@ -74,6 +75,12 @@
   function goCityUrl(cityPath) {
     return 'https://tp.media/r?campaign_id=62&marker=' + MARKER + '&p=1942&trs=' + TRS +
            '&u=' + encodeURIComponent('https://gocity.com' + (cityPath ? '/' + cityPath : ''));
+  }
+  // Same pattern for AirHelp: the redirector carries the AirHelp+ discount, so the
+  // code stays out of the HTML.
+  function airHelpUrl() {
+    return 'https://tp.media/r?campaign_id=120&marker=' + MARKER + '&p=9139&trs=' + TRS +
+           '&u=' + encodeURIComponent('https://airhelp.com');
   }
 
   /* ---------- markup ---------- */
@@ -196,14 +203,68 @@
       '</div>';
   }
 
+  /* AirHelp — flight-delay/cancellation compensation. The AirHelp+ discount code
+     is deliberately not in the markup; the redirector applies it. */
+  var AIRHELP_PROMO = { from: '2026-09-01', to: '2026-11-30', off: '11%' };
+
+  function airHelpBlock() {
+    var url = airHelpUrl();
+    var today = iso(new Date());
+    var promoOn = today >= AIRHELP_PROMO.from && today <= AIRHELP_PROMO.to;
+    var promo = promoOn
+      ? '<div class="ah-promo">מבצע לזמן מוגבל · ' + heDate(AIRHELP_PROMO.from) + '–' +
+        heDate(AIRHELP_PROMO.to) + ' · ' + AIRHELP_PROMO.off + ' הנחה על מנוי AirHelp+</div>'
+      : '';
+    var cta = '<a class="td-btn ah-btn" href="' + url + '" target="_blank" rel="sponsored noopener"' +
+              ' data-aff-partner="airhelp" data-aff-placement="' +
+              (airHelpVariant === 'compact' ? 'airhelp_compact' : 'airhelp_full') + '"' +
+              ' data-aff-dest="' + (iata || '') + '">בדקו זכאות לפיצוי ←</a>';
+
+    if (airHelpVariant === 'compact') {
+      return '' +
+        '<div class="td-block ah-block ah-compact">' +
+          '<div class="ah-title">טיסה התעכבה או בוטלה? בדקו אם מגיע לכם פיצוי</div>' +
+          '<p class="ah-sub">עיכוב של 3 שעות ומעלה, ביטול או סירוב עלייה לטיסה עשויים לזכות אתכם ' +
+            'בפיצוי של עד 600 יורו — גם על טיסות מלפני שנים. הבדיקה חינם.</p>' +
+          promo + cta +
+        '</div>';
+    }
+    return '' +
+      '<div class="td-block ah-block">' +
+        '<div class="ah-head"><span class="ah-logo">AirHelp</span>' +
+          '<span class="ah-tag">פיצוי על טיסות · בדיקה חינם</span></div>' +
+        promo +
+        '<div class="ah-title">טיסה התעכבה או בוטלה? ייתכן שמגיע לכם פיצוי</div>' +
+        '<p class="ah-sub">תקנות האיחוד האירופי (EC 261) וחוק שירותי תעופה הישראלי מזכים נוסעים ' +
+          'בפיצוי על עיכוב של 3 שעות ומעלה, ביטול טיסה או סירוב עלייה — עד 600 יורו לנוסע, ' +
+          'ולעיתים גם על טיסות מלפני שנים. רוב הנוסעים פשוט לא מגישים תביעה.</p>' +
+        '<ul class="ah-list">' +
+          '<li>בדיקת זכאות חינם, בלי התחייבות</li>' +
+          '<li>AirHelp מנהלת את התביעה מול חברת התעופה</li>' +
+          '<li>עמלה נגבית רק אם התביעה מצליחה</li>' +
+        '</ul>' +
+        cta +
+        '<p class="td-note ah-note">שירות של צד שלישי. תנאי השירות והעמלה מפורטים באתר AirHelp.</p>' +
+      '</div>';
+  }
+
   var DISCLOSURE = 'האתר מכיל קישורי שותפים. רכישה דרכם תומכת בפיתוח שירותים חינמיים נוספים.';
 
   /* ---------- render ---------- */
   function render() {
+    // AirHelp is the highest-margin placement, so a page may pull it out of the
+    // stack and mount it high in the content via <div id="airhelp-slot">.
+    var ahSlot = has('airhelp') ? document.getElementById('airhelp-slot') : null;
+    if (ahSlot) {
+      ahSlot.className = 'td-section' + (ahSlot.closest('.container') ? '' : ' td-standalone');
+      ahSlot.innerHTML = airHelpBlock();
+    }
+
     var html = '';
     if (has('flights')) html += flightsBlock();
     if (has('hotels'))  html += hotelsBlock();
     if (has('gocity'))  html += goCityBlock();
+    if (has('airhelp') && !ahSlot) html += airHelpBlock();
     if (has('esim'))    html += esimBlock();
     if (!html) { addDisclosure(); return; }
 
