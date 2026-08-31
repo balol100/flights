@@ -43,3 +43,16 @@ footer .td-disclosure{background:transparent;border:none;color:var(--gray-400,#9
 .td-brand,.td-brand>span{display:flex}
 .td-brand>span{flex-direction:column;justify-content:center;min-width:0}
 .td-brand-name,.td-brand-desc{display:block}
+
+/* ---- Go City: deliberately a dark card. Go City's own branding is dark, and the
+   contrast against the light page makes the offer read as an offer, not as body copy. */
+.gc-block{background:linear-gradient(150deg,#141a2e 0%,#1e2545 55%,#2a1f4d 100%);border:1px solid #2f3a63;color:#e8ecf7}
+.gc-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.gc-logo{font-weight:800;font-size:1.05rem;letter-spacing:.02em;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:4px 12px;border-radius:8px}
+.gc-tag{font-size:.78rem;color:#9fb0d8}
+.gc-promo{display:inline-block;background:linear-gradient(135deg,#f5a524,#ff7a45);color:#20160a;font-weight:800;font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:10px}
+.gc-title{font-size:1.18rem;font-weight:800;color:#fff;line-height:1.45;margin-bottom:6px}
+.gc-sub{font-size:.9rem;color:#b9c5e4;margin-bottom:4px}
+.gc-btn{background:linear-gradient(135deg,#7b5cff,#a855f7);margin-top:16px;color:#fff}
+.gc-btn:hover{box-shadow:0 10px 22px -6px rgba(123,92,255,.55)}
+.gc-note{color:#8595bd !important}

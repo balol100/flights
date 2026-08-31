@@ -5,16 +5,22 @@
  *   <meta name="tp-city-en" content="Athens">   English city name (Hotellook search term)
  *   <meta name="tp-city-he" content="אתונה">    Hebrew city name (display only)
  *   <meta name="tp-esim"    content="greece">   Airalo country slug -> /{slug}-esim
- *   <meta name="tp-blocks"  content="flights,hotels,esim">  which blocks to render
+ *   <meta name="tp-gocity"  content="barcelona"> Go City city path -> gocity.com/{path}
+ *   <meta name="tp-blocks"  content="flights,hotels,esim,gocity">  which blocks to render
  *
  * Renders into #travel-deals when present, otherwise just before <footer>.
- * All outbound links carry marker=561903; the Travelpayouts Drive script in
- * <head> converts the remaining partner links (Airalo, EKTA) on click.
+ *
+ * MARKER is the Travelpayouts affiliate id and must appear in every Aviasales /
+ * Hotellook / tp.media URL — a link without it looks identical but earns nothing.
+ * TRS is the traffic-source id (the value encoded in the Drive script filename);
+ * it is NOT the marker. The Drive script in <head> converts the remaining partner
+ * links (Airalo, EKTA) on click.
  */
 (function () {
   'use strict';
 
-  var MARKER = '561903';
+  var MARKER = '764091';
+  var TRS = '561903';
 
   function meta(name, fallback) {
     var el = document.querySelector('meta[name="' + name + '"]');
@@ -26,8 +32,15 @@
   var cityEn = meta('tp-city-en');
   var cityHe = meta('tp-city-he', cityEn);
   var esimC  = meta('tp-esim');
+  var goCity = meta('tp-gocity');
   var blocks = meta('tp-blocks', 'hotels,esim').split(',').map(function (s) { return s.trim(); });
   var has    = function (b) { return blocks.indexOf(b) !== -1; };
+
+  function track(partner, placement, url) {
+    if (typeof window.trackAffiliateClick === 'function') {
+      window.trackAffiliateClick(partner, { placement: placement, dest: iata || cityEn, url: url });
+    }
+  }
 
   /* ---------- date helpers ---------- */
   function iso(d) {
@@ -55,6 +68,12 @@
            '&destination=' + encodeURIComponent(city) +
            '&checkIn=' + checkIn + '&checkOut=' + checkOut +
            '&adults=' + (adults || 2) + '&currency=ils&language=he';
+  }
+  // Go City runs through the Travelpayouts redirector, which is also what reveals
+  // the current discount code — so we never publish a code in the markup.
+  function goCityUrl(cityPath) {
+    return 'https://tp.media/r?campaign_id=62&marker=' + MARKER + '&p=1942&trs=' + TRS +
+           '&u=' + encodeURIComponent('https://gocity.com' + (cityPath ? '/' + cityPath : ''));
   }
 
   /* ---------- markup ---------- */
@@ -115,14 +134,65 @@
         '<div class="td-title">אינטרנט וביטוח נסיעות</div>' +
         '<p class="td-sub">שני הדברים שהכי משתלם לסדר לפני שיוצאים, ולא בשדה התעופה.</p>' +
         '<div class="td-esim-grid">' +
-          '<a class="td-card" href="' + airalo + '" target="_blank" rel="sponsored noopener">' +
+          '<a class="td-card" href="' + airalo + '" target="_blank" rel="sponsored noopener"' +
+            ' data-aff-partner="airalo" data-aff-placement="esim_card">' +
             '<div class="td-ico">eSIM</div><div><div class="td-nm">Airalo' +
             (cityHe ? ' — חבילת גלישה ל' + cityHe : ' — חבילות גלישה') + '</div>' +
             '<div class="td-ds">כרטיס SIM דיגיטלי, מופעל בסריקת קוד. בלי חיפוש סים מקומי ובלי נדידה יקרה.</div></div></a>' +
-          '<a class="td-card" href="https://ekta.com/" target="_blank" rel="sponsored noopener">' +
+          '<a class="td-card" href="https://ekta.com/" target="_blank" rel="sponsored noopener"' +
+            ' data-aff-partner="ekta" data-aff-placement="insurance_card">' +
             '<div class="td-ico">EKTA</div><div><div class="td-nm">ביטוח נסיעות</div>' +
             '<div class="td-ds">כיסוי רפואי לחו״ל, רכישה אונליין תוך דקות, כולל אפשרות לספורט אתגרי.</div></div></a>' +
         '</div>' +
+      '</div>';
+  }
+
+  /* Go City seasonal campaigns. The discount code itself is deliberately NOT in
+     the markup — the Travelpayouts landing page reveals it. We only advertise the
+     window and the size of the saving, and the banner disappears once it lapses. */
+  var GOCITY_PROMOS = [
+    { cities: ['barcelona', 'prague', 'madrid'], from: '2026-09-04', to: '2026-09-07', off: '10%' },
+    { cities: ['new-york'],                      from: '2026-09-04', to: '2026-09-07', off: '10%' }
+  ];
+
+  function activePromo(cityPath) {
+    var today = iso(new Date());
+    for (var i = 0; i < GOCITY_PROMOS.length; i++) {
+      var p = GOCITY_PROMOS[i];
+      if (p.cities.indexOf(cityPath) !== -1 && today >= p.from && today <= p.to) return p;
+    }
+    return null;
+  }
+
+  function heDate(isoStr) {                       // "2026-09-04" -> "4.9"
+    var p = String(isoStr).split('-');
+    return parseInt(p[2], 10) + '.' + parseInt(p[1], 10);
+  }
+
+  function goCityBlock() {
+    if (!goCity) return '';
+    var url = goCityUrl(goCity);
+    var promo = activePromo(goCity);
+    var banner = promo
+      ? '<div class="gc-promo">מבצע לזמן מוגבל · ' + heDate(promo.from) + '–' + heDate(promo.to) +
+        ' · עד ' + promo.off + ' הנחה נוספת</div>'
+      : '';
+    return '' +
+      '<div class="td-block gc-block">' +
+        '<div class="gc-head">' +
+          '<span class="gc-logo">Go City</span>' +
+          '<span class="gc-tag">כרטיס אחד · עשרות אטרקציות</span>' +
+        '</div>' +
+        banner +
+        '<div class="gc-title">חסכו עד 10% עם Go City All-Inclusive Pass' +
+          (cityHe ? ' ב' + cityHe : '') + '</div>' +
+        '<p class="gc-sub">כרטיס אחד שנותן כניסה לעשרות אטרקציות, מוזיאונים וסיורים ' +
+          (cityHe ? 'ב' + cityHe : 'ביעד') + ' — במקום לשלם על כל אתר בנפרד. ' +
+          'משתלם במיוחד לטיול עירוני קצר שבו מספיקים 3–5 אתרים ביום.</p>' +
+        '<a class="td-btn gc-btn" href="' + url + '" target="_blank" rel="sponsored noopener"' +
+          ' data-aff-partner="gocity" data-aff-placement="gocity_card"' +
+          ' data-aff-dest="' + (goCity || '') + '">לחצו לחשיפת קוד ההנחה ←</a>' +
+        '<p class="td-note gc-note">הקוד נחשף בעמוד המבצע של Go City. המחיר והזמינות עשויים להשתנות.</p>' +
       '</div>';
   }
 
@@ -133,6 +203,7 @@
     var html = '';
     if (has('flights')) html += flightsBlock();
     if (has('hotels'))  html += hotelsBlock();
+    if (has('gocity'))  html += goCityBlock();
     if (has('esim'))    html += esimBlock();
     if (!html) { addDisclosure(); return; }
 
@@ -168,7 +239,9 @@
         var pax  = document.getElementById('tdFlightPax').value;
         if (!out) { alert('בחרו תאריך יציאה'); return; }
         if (back && back < out) { alert('תאריך החזרה חייב להיות אחרי תאריך היציאה'); return; }
-        openTab(aviasalesUrl('TLV', iata, out, back, pax));
+        var url = aviasalesUrl('TLV', iata, out, back, pax);
+        track('aviasales', 'widget_flights', url);
+        openTab(url);
       });
     }
     var hGo = document.getElementById('tdHotelGo');
@@ -181,7 +254,9 @@
         if (!city) { alert('הזינו יעד'); return; }
         if (!ci || !co) { alert('בחרו תאריכי שהייה'); return; }
         if (co <= ci) { alert('תאריך היציאה מהמלון חייב להיות אחרי תאריך הכניסה'); return; }
-        openTab(hotellookUrl(city, ci, co, ad));
+        var hurl = hotellookUrl(city, ci, co, ad);
+        track('hotellook', 'widget_hotels', hurl);
+        openTab(hurl);
       });
     }
   }

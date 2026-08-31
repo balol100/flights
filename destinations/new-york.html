@@ -33,8 +33,10 @@
 <meta name="tp-city-en" content="New York">
 <meta name="tp-city-he" content="ניו יורק">
 <meta name="tp-esim" content="united-states">
-<meta name="tp-blocks" content="flights,hotels,esim">
+<meta name="tp-gocity" content="new-york">
+<meta name="tp-blocks" content="flights,hotels,gocity,esim">
 <link rel="stylesheet" href="/assets/travel-deals.css">
+<script src="/assets/analytics.js"></script>
 <script defer src="/assets/travel-deals.js"></script>
 
 <script type="application/ld+json">
@@ -187,6 +189,11 @@ footer a{color:var(--cyan-400)}
 .info-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
 @media(max-width:768px){.info-grid{grid-template-columns:1fr 1fr}}
 
+
+.traps{margin:14px 0}
+.trap{background:#fff;border:1px solid var(--gray-200);border-inline-start:4px solid var(--cyan-500);border-radius:var(--radius);padding:14px 18px;margin-bottom:10px;box-shadow:var(--shadow)}
+.trap h3{margin:0 0 4px;font-size:1rem;color:var(--gray-800)}
+.trap p{margin:0;font-size:.92rem;color:var(--gray-600)}
 </style>
 </head>
 <body>
@@ -246,6 +253,18 @@ footer a{color:var(--cyan-400)}
     <p>עבור ביקור תיירותי לניו יורק: נדרש אישור ESTA מראש. דרישות הכניסה ותוקף הדרכון הנדרש משתנים מעת לעת —
     ודאו את הפרטים באתר <a href="https://www.gov.il/he/departments/ministry_of_foreign_affairs" target="_blank" rel="noopener">משרד החוץ הישראלי</a>
     ומול הנציגות של ארצות הברית לפני ההזמנה.</p>
+
+    <h2>למה ישראלים טסים לניו יורק?</h2>
+    <p>ניו יורק היא היעד החוץ-אירופי הפופולרי ביותר לישראלים, ומשלבת שלוש נסיעות שונות באותו כרטיס: קניות, ביקורי משפחה ועסקים. הקהילה היהודית בעיר היא הגדולה מחוץ לישראל, ובברוקלין, במנהטן ובקווינס יש תשתית מלאה של מסעדות ומרכולים כשרים — כך שגם נסיעה ארוכה עם משפחה שומרת כשרות היא פשוטה יחסית. ההצטרפות של ישראל לתוכנית פטור מוויזה הפכה את התכנון לקל בהרבה, אבל עדיין דורשת אישור מראש.</p>
+
+    <h2>טעויות שעולות כסף — ומה לעשות במקום</h2>
+    <div class="traps">
+      <div class="trap"><h3>ESTA — לא ויזה, אבל חובה</h3><p>נדרש אישור ESTA מאושר לפני העלייה לטיסה. הגישו לפחות שבוע מראש, ורק דרך האתר הרשמי — יש עשרות אתרים שגובים עמלה מיותרת על אותו טופס.</p></div>
+      <div class="trap"><h3>המחיר על התווית אינו המחיר בקופה</h3><p>מס מכירה מתווסף רק בקופה. תקציבו כ-9% מעל המחיר המוצג בניו יורק סיטי.</p></div>
+      <div class="trap"><h3>טיפ הוא חלק מהמחיר</h3><p>במסעדות מצופה 18-20%. במקומות רבים כבר מודפסות הצעות טיפ על החשבון — בדקו שלא הוסיפו אותו ואז שילמתם פעמיים.</p></div>
+      <div class="trap"><h3>מונית משדה התעופה</h3><p>מ-JFK יש תעריף קבוע למנהטן פלוס אגרות וטיפ. שילוב AirTrain ורכבת עולה עשירית מזה. בדקו גם טיסות לניוארק — לרוב זולות ב-100-400 ₪ מ-JFK.</p></div>
+      <div class="trap"><h3>כרטיסי הצגה במחיר מלא</h3><p>דוכני TKTS מוכרים כרטיסים להצגות באותו יום בהנחה של עד חצי מהמחיר.</p></div>
+    </div>
 
     <div class="faq" id="faq">
       <h2>שאלות נפוצות על טיסות לניו יורק</h2>

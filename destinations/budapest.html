@@ -33,8 +33,10 @@
 <meta name="tp-city-en" content="Budapest">
 <meta name="tp-city-he" content="בודפשט">
 <meta name="tp-esim" content="hungary">
-<meta name="tp-blocks" content="flights,hotels,esim">
+<meta name="tp-gocity" content="budapest">
+<meta name="tp-blocks" content="flights,hotels,gocity,esim">
 <link rel="stylesheet" href="/assets/travel-deals.css">
+<script src="/assets/analytics.js"></script>
 <script defer src="/assets/travel-deals.js"></script>
 
 <script type="application/ld+json">
@@ -118,6 +120,11 @@ footer a{color:var(--cyan-400)}
 
 .info-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
 @media(max-width:768px){.info-grid{grid-template-columns:1fr 1fr}}
+
+.traps{margin:14px 0}
+.trap{background:#fff;border:1px solid var(--gray-200);border-inline-start:4px solid var(--cyan-500);border-radius:var(--radius);padding:14px 18px;margin-bottom:10px;box-shadow:var(--shadow)}
+.trap h3{margin:0 0 4px;font-size:1rem;color:var(--gray-800)}
+.trap p{margin:0;font-size:.92rem;color:var(--gray-600)}
 </style>
 
 <script type="application/ld+json">
@@ -238,6 +245,18 @@ footer a{color:var(--cyan-400)}
 
     <a href="/" class="cta-btn">🔍 השוו מחירים לבודפשט ב-5 מקורות</a>
 
+
+    <h2>למה ישראלים טסים לבודפשט?</h2>
+    <p>בודפשט הפכה ליעד ישראלי מרכזי בעיקר בזכות Wizz Air, שהפכה אותה למרכז חיבורים זול לכל אירופה — רבים טסים אליה גם כיעד עצמאי וגם כנקודת מעבר. המחירים בה נמוכים מאלה של ערי מערב אירופה, והרובע השביעי — הרובע היהודי ההיסטורי — הוא גם מרכז החיים והבילוי של העיר, עם בית הכנסת ברחוב דוהאני, הגדול באירופה. הבתי מרחץ התרמיים הם החוויה שאין לה מקבילה בשאר היעדים ברשימה.</p>
+
+    <h2>טעויות שעולות כסף — ומה לעשות במקום</h2>
+    <div class="traps">
+      <div class="trap"><h3>מוניות שנעצרות ברחוב</h3><p>בבודפשט מוניות לא מוזמנות הן בעיה מוכרת. הזמינו דרך Bolt או Főtaxi בלבד.</p></div>
+      <div class="trap"><h3>חלפנים לא מורשים</h3><p>הימנעו מדוכני המרה ברחוב ומכל מי שמציע המרה מזומן ליד אתרי תיירות. משכו פורינט מכספומט של בנק ותמיד סרבו להמרה למטבע שלכם.</p></div>
+      <div class="trap"><h3>בתי מרחץ — תא מול ארונית</h3><p>בסצ׳ני וגלרט יש שני תעריפים. ההפרש קטן, אבל התא הפרטי חוסך תור ארוך בשעות העומס. הזמינו כרטיס מראש באתר.</p></div>
+      <div class="trap"><h3>דמי שירות בחשבון</h3><p>מסעדות רבות מוסיפות 12-15% דמי שירות אוטומטית. בדקו לפני שאתם מוסיפים טיפ.</p></div>
+      <div class="trap"><h3>פאבי חורבות בשעות שיא</h3><p>סימפלה קרט וסביבתו מתמחרים גבוה בסופי שבוע. פאבים באותה שכונה במרחק שני רחובות גובים חצי על אותה בירה.</p></div>
+    </div>
 
     <div class="faq" id="faq">
       <h2>שאלות נפוצות על טיסות לבודפשט</h2>

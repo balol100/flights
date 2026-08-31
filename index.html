@@ -41,6 +41,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <meta name="tp-blocks" content="hotels,esim">
 <link rel="stylesheet" href="/assets/travel-deals.css">
+<script src="/assets/analytics.js"></script>
 <script defer src="/assets/travel-deals.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -101,6 +102,8 @@ nav .container{display:flex;align-items:center;justify-content:space-between;hei
 .results-panel.show{display:block}
 .results-title{font-size:1.2rem;font-weight:700;color:var(--gray-800);margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .source-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.dest-guide{color:var(--cyan-600);text-decoration:underline;font-weight:600}
+.dest-guide:hover{color:var(--cyan-700)}
 .source-card{border:1px solid var(--gray-200);border-radius:var(--radius);padding:16px;display:flex;align-items:center;gap:12px;transition:.2s;cursor:pointer;text-decoration:none;color:inherit}
 .source-card:hover{border-color:var(--cyan-400);box-shadow:var(--shadow);transform:translateY(-2px)}
 .source-card img{width:32px;height:32px;border-radius:6px}
@@ -692,6 +695,14 @@ body.stop-animations,body.stop-animations *{animation:none!important;transition:
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ==== DATA ====
+// Destinations that have their own guide page. Rendered as a real <a> so the
+// main page links into them (and they link back) instead of being orphans.
+const GUIDE_PAGES = {
+  ATH:'athens', LHR:'london', CDG:'paris', BER:'berlin', FCO:'rome', BCN:'barcelona',
+  MAD:'madrid', PRG:'prague', BUD:'budapest', IST:'istanbul', BKK:'bangkok',
+  JFK:'new-york', EWR:'new-york', BUS:'batumi'
+};
+
 const DESTINATIONS = {
   "אירופה / Europe": [
     {he:"לונדון",en:"London",code:"LHR",flag:"🇬🇧",time:"5:00"},
@@ -862,7 +873,7 @@ function renderDestinations() {
         <span class="flag">${d.flag}</span>
         <div class="dest-info">
           <div class="dest-city" data-he="${d.he}" data-en="${d.en}">${lang==='he'?d.he:d.en}</div>
-          <div class="dest-meta">${d.code}</div>
+          <div class="dest-meta">${d.code}${GUIDE_PAGES[d.code] ? ` · <a class="dest-guide" href="/destinations/${GUIDE_PAGES[d.code]}.html" onclick="event.stopPropagation()">${lang==='he'?'מדריך מלא':'Full guide'}</a>` : ''}</div>
         </div>
         <span class="dest-time">✈ ${d.time}</span>
       </div>`).join('')}</div>`;
@@ -992,7 +1003,17 @@ function setTrip(t) {
 
 const EDGE_FN_URL = 'https://evufisyrxfrwksequajt.supabase.co/functions/v1/search-flights';
 
-const TP_MARKER = '561903';
+// Travelpayouts affiliate id. 561903 is the traffic-source (trs) id, NOT the
+// marker — a link carrying it looks fine but is not attributed to us.
+const TP_MARKER = '764091';
+
+// Force our marker onto any Travelpayouts-family URL, whoever produced it.
+function withMarker(url) {
+  if (!url || !/aviasales\.com|hotellook\.com|tp\.media/.test(url)) return url;
+  return /[?&]marker=/.test(url)
+    ? url.replace(/([?&])marker=[^&]*/, `$1marker=${TP_MARKER}`)
+    : url + (url.includes('?') ? '&' : '?') + 'marker=' + TP_MARKER;
+}
 
 function buildSourceUrls(origin, dest, dateOut, dateIn, pax, cabin) {
   const cabinMap = {1:'economy',2:'premium_economy',3:'business',4:'first'};
@@ -1012,16 +1033,19 @@ function buildSourceUrls(origin, dest, dateOut, dateIn, pax, cabin) {
 
   return {
     primary: {
+      key: "aviasales",
+      dest: dest,
+      paid: true,
       name: "Aviasales",
       desc: isHe ? "סורק למעלה מ-700 חברות תעופה וסוכנויות ומציג את המחיר הזול ביותר"
                  : "Scans 700+ airlines and agencies and shows the cheapest fare",
       url: avUrl
     },
     secondary: [
-      {name:"Trip.com",desc:isHe?"סוכנות בינלאומית גדולה":"Large global agency",url:tripUrl,bg:"#287dfa",icon:"T"},
-      {name:"Google Flights",desc:isHe?"לוח מחירים גמיש":"Flexible price calendar",url:gfUrl,bg:"#4285f4",icon:"G"},
-      {name:"Skyscanner",desc:isHe?"משווה מאות חברות":"Compares hundreds of airlines",url:ssUrl,bg:"#0770e3",icon:"S"},
-      {name:"Issta",desc:isHe?"סוכנות נסיעות ישראלית":"Israeli travel agency",url:isstUrl,bg:"#1a237e",icon:"I"}
+      {key:"tripcom",paid:true,name:"Trip.com",desc:isHe?"סוכנות בינלאומית גדולה":"Large global agency",url:tripUrl,bg:"#287dfa",icon:"T"},
+      {key:"google_flights",paid:false,name:"Google Flights",desc:isHe?"לוח מחירים גמיש":"Flexible price calendar",url:gfUrl,bg:"#4285f4",icon:"G"},
+      {key:"skyscanner",paid:false,name:"Skyscanner",desc:isHe?"משווה מאות חברות":"Compares hundreds of airlines",url:ssUrl,bg:"#0770e3",icon:"S"},
+      {key:"issta",paid:false,name:"Issta",desc:isHe?"סוכנות נסיעות ישראלית":"Israeli travel agency",url:isstUrl,bg:"#1a237e",icon:"I"}
     ]
   };
 }
@@ -1029,7 +1053,8 @@ function buildSourceUrls(origin, dest, dateOut, dateIn, pax, cabin) {
 function renderPrimarySource(p) {
   const isHe = lang === 'he';
   return `
-    <a class="td-block td-primary td-primary-link" href="${p.url}" target="_blank" rel="sponsored noopener">
+    <a class="td-block td-primary td-primary-link" href="${p.url}" target="_blank" rel="sponsored noopener"
+       data-aff-partner="aviasales" data-aff-placement="primary_card" data-aff-dest="${p.dest || ''}">
       <span class="td-primary-badge">${isHe ? 'המחיר הזול ביותר' : 'Best price'}</span>
       <span class="td-brand">
         <span class="td-brand-mark">A</span>
@@ -1043,7 +1068,8 @@ function renderPrimarySource(p) {
 }
 function renderSourceGrid(sources) {
   return sources.map(s => `
-    <a class="source-card" href="${s.url}" target="_blank" rel="noopener">
+    <a class="source-card" href="${s.url}" target="_blank" rel="${s.paid ? 'sponsored noopener' : 'noopener'}"
+       data-aff-partner="${s.key}" data-aff-placement="secondary_grid">
       <div class="source-icon" style="background:${s.bg};color:#fff;font-weight:700">${s.icon}</div>
       <div>
         <div class="source-name">${s.name}</div>
@@ -1095,8 +1121,12 @@ function renderFlightCard(flight, idx) {
   // Use the Aviasales link from the Edge Function, or build a Google Flights fallback with dates
   const dateOut = document.getElementById('dateOut')?.value || '';
   const dateIn = document.getElementById('dateIn')?.value || '';
-  const bookUrl = flight.link || flight.booking_url ||
+  const rawBookUrl = flight.link || flight.booking_url ||
     `https://www.google.com/travel/flights?q=Flights+from+${depCode}+to+${arrCode}+on+${dateOut}${tripType==='round'&&dateIn?'+return+'+dateIn:''}&curr=ILS&hl=${isHe?'he':'en'}&gl=il`;
+  // The search-flights Edge Function still returns links tagged with the old
+  // traffic-source id, so every "book" click would go unattributed. Rewrite it
+  // here until the function itself is redeployed with marker=764091.
+  const bookUrl = withMarker(rawBookUrl);
   const priceDisplay = flight.price > 0 ? `<span class="currency">${flight.currency === 'ILS' ? '₪' : '$'}</span>${flight.price.toLocaleString()}` : (isHe ? 'ראו מחיר' : 'See price');
   const priceLabel = tripType === 'round' ? (isHe ? 'הלוך ושוב' : 'Round trip') : (isHe ? 'כיוון אחד' : 'One way');
 
@@ -1127,7 +1157,8 @@ function renderFlightCard(flight, idx) {
       <div class="flight-price-col">
         <div class="flight-price">${priceDisplay}</div>
         <div style="font-size:.75rem;color:var(--gray-500);margin-top:2px">${priceLabel}</div>
-        <a class="flight-book-btn" href="${bookUrl}" target="_blank" rel="noopener">${isHe ? 'הזמן' : 'Book'} →</a>
+        <a class="flight-book-btn" href="${bookUrl}" target="_blank" rel="sponsored noopener"
+           data-aff-partner="aviasales" data-aff-placement="flight_result" data-aff-dest="${arrCode}">${isHe ? 'הזמן' : 'Book'} →</a>
       </div>
     </div>`;
 }
