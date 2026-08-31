@@ -34,8 +34,16 @@
     Content-Type = "text/plain"
 
 # The shared monetization scripts carry the affiliate marker, so a stale copy in a
-# returning visitor's cache means unattributed clicks. These are two small files —
-# revalidate every load (304s are cheap) rather than serving them for 4 hours.
+# returning visitor's cache means unattributed clicks.
+#
+# NOTE: this rule alone does not fix that. The Netlify origin already sends
+# "public,max-age=0,must-revalidate" for these files — verified directly against
+# flights-lior-ai.netlify.app. The 4-hour TTL seen at flights.lior-ai.com is added
+# by CLOUDFLARE (Browser Cache TTL = 4 hours, the 14400 preset), which overrides the
+# origin header for static assets but not for HTML. The real fix is in the Cloudflare
+# dashboard: Caching > Configuration > Browser Cache TTL = "Respect Existing Headers",
+# or a Cache Rule scoped to /assets/*. This block states the origin's intent so the
+# behaviour is correct the moment Cloudflare stops overriding it.
 [[headers]]
   for = "/assets/*"
   [headers.values]
