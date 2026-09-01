@@ -90,6 +90,17 @@
     return 'https://tp.media/r?campaign_id=224&marker=' + MARKER + '&p=5998&trs=' + TRS +
            '&u=' + encodeURIComponent('https://yesim.tech');
   }
+  /* Dashboard-generated short links. Unlike the tp.media/r links these carry no
+     visible marker= — attribution is baked into the code in the path, and the
+     redirect lands with our id appended (EKTA: sub_id=...-764091, Kiwitaxi:
+     tpo=...-764091). Verified live; do not "fix" them by adding marker params. */
+  var EKTA_URL     = 'https://ektatraveling.tpx.li/FE3ZLDAD';
+  var KIWITAXI_URL = 'https://kiwitaxi.tpx.li/IMwND3YK';
+  // NOT LIVE: this short link returns {"error":"not found a link","status":404}.
+  // The car block stays out of every page's tp-blocks until a working link exists;
+  // swapping this constant and adding "car" to the meta is all that's needed then.
+  var GETRENTACAR_URL = 'https://getrentacar.tpx.li/GGcaNliJ';
+
   function airaloUrl() {
     // Keep the country landing page where we know it: the redirector forwards the
     // path and still attaches its own click id, so nothing is lost by deep-linking.
@@ -178,17 +189,52 @@
           '<div class="td-ico">eSIM</div><div><div class="td-nm">Airalo' +
           (cityHe ? ' — חבילת גלישה ל' + cityHe : ' — חבילות גלישה') + '</div>' +
           '<div class="td-ds">הספק הוותיק בתחום, עם חבילות קטנות וזולות לטיולים קצרים.</div></div></a>' +
-      '</div>' +
-      // ---- travel insurance stays its own block ----
+      '</div>';
+  }
+
+  function insuranceBlock() {
+    return '' +
+      '<div class="td-block ins-block">' +
+        '<div class="td-title">ביטוח נסיעות — אל תטוסו בלי</div>' +
+        '<p class="td-sub">כרטיס האשראי לרוב מכסה פחות משנדמה, והכיסוי הרפואי הוא מה שבאמת יקר ' +
+          'אם משהו קורה. שווה לסדר לפני שיוצאים, ולא בדלפק בשדה התעופה.</p>' +
+        '<a class="ins-cta" href="' + EKTA_URL + '" target="_blank" rel="sponsored noopener"' +
+          ' data-aff-partner="ekta" data-aff-placement="insurance_card"' +
+          ' data-aff-dest="' + (iata || '') + '">' +
+          '<span class="ins-row">' +
+            '<span class="ins-mark">EKTA</span>' +
+            '<span class="ins-copy">' +
+              '<span class="ins-nm">EKTA — ביטוח נסיעות לחו״ל</span>' +
+              '<span class="ins-ds">כיסוי רפואי, רכישה אונליין תוך דקות, והרחבות לספורט אתגרי ' +
+                'ולביטול נסיעה.</span>' +
+            '</span>' +
+          '</span>' +
+          '<span class="ins-btn">בדקו מחיר לפוליסה ←</span>' +
+        '</a>' +
+      '</div>';
+  }
+
+  function carBlock() {
+    return '' +
       '<div class="td-block">' +
-        '<div class="td-title">ביטוח נסיעות</div>' +
-        '<p class="td-sub">כדאי לסדר לפני שיוצאים, ולא בשדה התעופה.</p>' +
-        '<div class="td-esim-grid">' +
-          '<a class="td-card" href="https://ekta.com/" target="_blank" rel="sponsored noopener"' +
-            ' data-aff-partner="ekta" data-aff-placement="insurance_card">' +
-            '<div class="td-ico">EKTA</div><div><div class="td-nm">EKTA — ביטוח נסיעות</div>' +
-            '<div class="td-ds">כיסוי רפואי לחו״ל, רכישה אונליין תוך דקות, כולל אפשרות לספורט אתגרי.</div></div></a>' +
-        '</div>' +
+        '<div class="td-title">השכרת רכב' + (cityHe ? ' ב' + cityHe : '') + '</div>' +
+        '<p class="td-sub">משתלם כשיוצאים מהעיר — טיולי יום, כפרים ואתרים שאין אליהם תחבורה ציבורית נוחה. ' +
+          'GetRentacar משווה בין חברות ההשכרה המקומיות והבינלאומיות.</p>' +
+        '<a class="td-btn td-btn-car" href="' + GETRENTACAR_URL + '" target="_blank" rel="sponsored noopener"' +
+          ' data-aff-partner="getrentacar" data-aff-placement="car_rental"' +
+          ' data-aff-dest="' + (iata || '') + '">השוו מחירי השכרת רכב ←</a>' +
+      '</div>';
+  }
+
+  function transferBlock() {
+    return '' +
+      '<div class="td-block">' +
+        '<div class="td-title">הסעה משדה התעופה</div>' +
+        '<p class="td-sub">נהג שמחכה עם שלט, מחיר סגור מראש ורכב לפי מספר הנוסעים והמזוודות. ' +
+          'שימושי בעיקר בנחיתת לילה, עם ילדים, או בשדה שרחוק מהמרכז.</p>' +
+        '<a class="td-btn td-btn-transfer" href="' + KIWITAXI_URL + '" target="_blank" rel="sponsored noopener"' +
+          ' data-aff-partner="kiwitaxi" data-aff-placement="airport_transfer"' +
+          ' data-aff-dest="' + (iata || '') + '">בדקו מחיר להסעה ←</a>' +
       '</div>';
   }
 
@@ -298,13 +344,36 @@
       ahSlot.innerHTML = airHelpBlock();
     }
 
-    var html = '';
-    if (has('flights')) html += flightsBlock();
-    if (has('hotels'))  html += hotelsBlock();
-    if (has('gocity'))  html += goCityBlock();
-    if (has('airhelp') && !ahSlot) html += airHelpBlock();
-    if (has('esim'))    html += esimBlock();
-    if (!html) { addDisclosure(); return; }
+    // Fixed priority order, independent of the order names appear in tp-blocks.
+    var ORDER = [
+      ['flights',   flightsBlock],
+      ['hotels',    hotelsBlock],
+      ['insurance', insuranceBlock],
+      ['esim',      esimBlock],
+      ['car',       carBlock],
+      ['transfer',  transferBlock],
+      ['gocity',    goCityBlock],
+      ['airhelp',   function () { return ahSlot ? '' : airHelpBlock(); }]
+    ];
+
+    // A page may offer a second mount to split the stack. Eight blocks in one run
+    // would push the actual article below a wall of offers, so destination pages
+    // keep flights+hotels up top and send the rest lower down. The priority order
+    // still reads top-to-bottom across the two mounts.
+    var more = document.getElementById('travel-deals-more');
+    var TOP_OF_STACK = 2;                       // flights, hotels
+    var html = '', htmlMore = '';
+    ORDER.forEach(function (entry, i) {
+      if (!has(entry[0])) return;
+      var chunk = entry[1]();
+      if (more && i >= TOP_OF_STACK) htmlMore += chunk;
+      else html += chunk;
+    });
+    if (more) {
+      more.className = 'td-section' + (more.closest('.container') ? '' : ' td-standalone');
+      more.innerHTML = htmlMore;
+    }
+    if (!html) { if (htmlMore) { wire(); } addDisclosure(); return; }
 
     // Pages that want control over placement ship their own <section id="travel-deals">;
     // those inherit the surrounding content width. Anywhere else we append before the

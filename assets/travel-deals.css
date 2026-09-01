@@ -93,3 +93,19 @@ footer .td-disclosure{background:transparent;border:none;color:var(--gray-400,#9
 .esim-block .esim-alt-label{margin:16px 0 8px;font-size:.8rem;font-weight:700;color:var(--gray-500,#64748b)}
 @media(max-width:600px){.esim-primary .esim-mark{width:54px;height:40px;font-size:.85rem}
 .esim-primary .esim-row{align-items:flex-start}}
+
+/* ---- Travel insurance (EKTA). Second-highest margin after AirHelp, so it gets a
+   tinted card rather than a plain one — but stays lighter than AirHelp so the
+   page still has a clear visual hierarchy. */
+.ins-cta{display:block;margin-top:14px;padding:16px;border-radius:var(--radius,12px);text-decoration:none;background:linear-gradient(140deg,#eafaf1,#d7f3e5);border:1px solid #a7e0c4;transition:.2s}
+.ins-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow,0 4px 6px -1px rgb(0 0 0/.1))}
+.ins-cta .ins-row{display:flex;align-items:center;gap:12px}
+.ins-cta .ins-mark{flex:none;width:64px;height:44px;border-radius:9px;background:#0f7a4d;color:#fff;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.ins-cta .ins-copy{display:flex;flex-direction:column;min-width:0}
+.ins-cta .ins-nm{display:block;font-weight:800;font-size:1rem;color:#0b3d28}
+.ins-cta .ins-ds{display:block;font-size:.85rem;color:#2f6b51;line-height:1.6}
+.ins-cta .ins-btn{display:block;margin-top:14px;text-align:center;padding:13px 20px;border-radius:var(--radius,12px);background:linear-gradient(135deg,#12a463,#0f7a4d);color:#fff;font-weight:800;font-size:1.02rem}
+/* ---- Car rental + airport transfer: plain cards, they are mid-funnel add-ons. */
+.td-btn-car{background:linear-gradient(135deg,#7c3aed,#6d28d9)}
+.td-btn-transfer{background:linear-gradient(135deg,#0f766e,#0d9488)}
+@media(max-width:600px){.ins-cta .ins-mark{width:54px;height:40px;font-size:.82rem}.ins-cta .ins-row{align-items:flex-start}}
