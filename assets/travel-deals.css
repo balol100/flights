@@ -76,3 +76,20 @@ footer .td-disclosure{background:transparent;border:none;color:var(--gray-400,#9
 .ah-block.ah-compact .ah-title{font-size:1.08rem}
 .ah-block.ah-compact .ah-sub{font-size:.88rem;margin-bottom:8px}
 .ah-block.ah-compact .ah-btn{font-size:1rem;margin-top:12px}
+
+/* ---- eSIM: Yesim is the primary (18% / 90-day cookie vs Airalo's 12% / 30-day),
+   so it gets the full-width branded card and Airalo sits under it as the alternative.
+   Text rules are scoped under .esim-primary because destination pages style
+   ".content p" and blog articles ".article p", which outrank bare class selectors. */
+.esim-primary{position:relative;overflow:hidden;display:block;margin:14px 0 0;padding:18px;border-radius:var(--radius,12px);text-decoration:none;background:linear-gradient(140deg,#07303a 0%,#0d5566 55%,#0e7490 100%);border:1px solid #14758c;transition:.2s}
+.esim-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg,0 10px 15px -3px rgb(0 0 0/.1))}
+.esim-primary .esim-badge{position:absolute;top:0;inset-inline-start:0;background:linear-gradient(135deg,#22d3ee,#0891b2);color:#04212a;font-size:.72rem;font-weight:800;padding:4px 14px;border-end-end-radius:10px}
+.esim-primary .esim-row{display:flex;align-items:center;gap:12px;margin-top:14px}
+.esim-primary .esim-mark{flex:none;width:64px;height:44px;border-radius:9px;background:#fff;color:#0b3b47;font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center}
+.esim-primary .esim-copy{display:flex;flex-direction:column;min-width:0}
+.esim-primary .esim-nm{display:block;font-weight:800;font-size:1rem;color:#fff}
+.esim-primary .esim-ds{display:block;font-size:.85rem;color:#bfe6f0;line-height:1.6}
+.esim-primary .esim-cta{display:block;margin-top:14px;text-align:center;padding:13px 20px;border-radius:var(--radius,12px);background:linear-gradient(135deg,#22d3ee,#06b6d4);color:#04212a;font-weight:800;font-size:1.02rem}
+.esim-block .esim-alt-label{margin:16px 0 8px;font-size:.8rem;font-weight:700;color:var(--gray-500,#64748b)}
+@media(max-width:600px){.esim-primary .esim-mark{width:54px;height:40px;font-size:.85rem}
+.esim-primary .esim-row{align-items:flex-start}}

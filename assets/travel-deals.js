@@ -82,6 +82,21 @@
     return 'https://tp.media/r?campaign_id=120&marker=' + MARKER + '&p=9139&trs=' + TRS +
            '&u=' + encodeURIComponent('https://airhelp.com');
   }
+  // eSIM. Yesim pays 18% on a 90-day cookie against Airalo's 12% on 30 days, so
+  // Yesim leads and Airalo is the stated alternative. Both now go through the
+  // Travelpayouts redirector rather than relying on the Drive script to rewrite a
+  // plain link, so attribution does not depend on Drive loading.
+  function yesimUrl() {
+    return 'https://tp.media/r?campaign_id=224&marker=' + MARKER + '&p=5998&trs=' + TRS +
+           '&u=' + encodeURIComponent('https://yesim.tech');
+  }
+  function airaloUrl() {
+    // Keep the country landing page where we know it: the redirector forwards the
+    // path and still attaches its own click id, so nothing is lost by deep-linking.
+    var dest = 'https://airalo.com' + (esimC ? '/' + esimC + '-esim' : '');
+    return 'https://tp.media/r?campaign_id=541&marker=' + MARKER + '&p=8310&trs=' + TRS +
+           '&u=' + encodeURIComponent(dest);
+  }
 
   /* ---------- markup ---------- */
   function field(id, label, type, value, extra) {
@@ -135,20 +150,43 @@
   }
 
   function esimBlock() {
-    var airalo = esimC ? 'https://www.airalo.com/' + esimC + '-esim' : 'https://www.airalo.com/';
+    var forCity = cityHe ? ' ב' + cityHe : ' בחו״ל';
     return '' +
+      // ---- eSIM: Yesim primary, Airalo alternative ----
+      '<div class="td-block esim-block">' +
+        '<div class="td-title">eSIM לחו״ל</div>' +
+        '<p class="td-sub">צריכים אינטרנט' + forCity + '? eSIM ב-30 שניות, בלי להחליף כרטיס SIM ' +
+          'ובלי חשבון נדידה מפתיע בחזרה.</p>' +
+        '<a class="esim-primary" href="' + yesimUrl() + '" target="_blank" rel="sponsored noopener"' +
+          ' data-aff-partner="yesim" data-aff-placement="esim_primary"' +
+          ' data-aff-dest="' + (iata || '') + '">' +
+          '<span class="esim-badge">מומלץ</span>' +
+          '<span class="esim-row">' +
+            '<span class="esim-mark">Yesim</span>' +
+            '<span class="esim-copy">' +
+              '<span class="esim-nm">Yesim — חבילת גלישה' + forCity + '</span>' +
+              '<span class="esim-ds">הפעלה בסריקת קוד, כיסוי בלמעלה מ-150 מדינות, ' +
+                'ואפשרות לחבילה אזורית אחת לכמה מדינות באותו טיול.</span>' +
+            '</span>' +
+          '</span>' +
+          '<span class="esim-cta">קחו חבילת גלישה ←</span>' +
+        '</a>' +
+        '<div class="esim-alt-label">חלופה</div>' +
+        '<a class="td-card" href="' + airaloUrl() + '" target="_blank" rel="sponsored noopener"' +
+          ' data-aff-partner="airalo" data-aff-placement="esim_alt"' +
+          ' data-aff-dest="' + (iata || '') + '">' +
+          '<div class="td-ico">eSIM</div><div><div class="td-nm">Airalo' +
+          (cityHe ? ' — חבילת גלישה ל' + cityHe : ' — חבילות גלישה') + '</div>' +
+          '<div class="td-ds">הספק הוותיק בתחום, עם חבילות קטנות וזולות לטיולים קצרים.</div></div></a>' +
+      '</div>' +
+      // ---- travel insurance stays its own block ----
       '<div class="td-block">' +
-        '<div class="td-title">אינטרנט וביטוח נסיעות</div>' +
-        '<p class="td-sub">שני הדברים שהכי משתלם לסדר לפני שיוצאים, ולא בשדה התעופה.</p>' +
+        '<div class="td-title">ביטוח נסיעות</div>' +
+        '<p class="td-sub">כדאי לסדר לפני שיוצאים, ולא בשדה התעופה.</p>' +
         '<div class="td-esim-grid">' +
-          '<a class="td-card" href="' + airalo + '" target="_blank" rel="sponsored noopener"' +
-            ' data-aff-partner="airalo" data-aff-placement="esim_card">' +
-            '<div class="td-ico">eSIM</div><div><div class="td-nm">Airalo' +
-            (cityHe ? ' — חבילת גלישה ל' + cityHe : ' — חבילות גלישה') + '</div>' +
-            '<div class="td-ds">כרטיס SIM דיגיטלי, מופעל בסריקת קוד. בלי חיפוש סים מקומי ובלי נדידה יקרה.</div></div></a>' +
           '<a class="td-card" href="https://ekta.com/" target="_blank" rel="sponsored noopener"' +
             ' data-aff-partner="ekta" data-aff-placement="insurance_card">' +
-            '<div class="td-ico">EKTA</div><div><div class="td-nm">ביטוח נסיעות</div>' +
+            '<div class="td-ico">EKTA</div><div><div class="td-nm">EKTA — ביטוח נסיעות</div>' +
             '<div class="td-ds">כיסוי רפואי לחו״ל, רכישה אונליין תוך דקות, כולל אפשרות לספורט אתגרי.</div></div></a>' +
         '</div>' +
       '</div>';
