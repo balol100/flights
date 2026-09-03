@@ -26,6 +26,7 @@
 | 14 | rosh-hashana-last-minute-flights-2026.html | לאסט מינוט לראש השנה 2026 | Aug 23, 2026 |
 | 15 | rosh-hashana-september-weather-2026.html | מזג האוויר בספטמבר 2026 — לאן לטוס לפי אקלים | Aug 23, 2026 |
 | — | hanukkah-flights-2026.html | טיסות זולות לחנוכה 2026 | Aug 20, 2026 |
+| — | election-long-weekend-october-2026.html | סופ״ש ארוך בבחירות 2026 — 24–28 באוקטובר (TASK-ELEC-FLIGHTS; neutral, no politics; tp-blocks incl. car; car.lior-ai.com cross-link) | Sep 3, 2026 |
 
 ## Short URLs Created
 - s.lior-ai.com/tishrei26 → flights.lior-ai.com/blog/tishrei-flights-2026.html
