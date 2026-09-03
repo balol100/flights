@@ -56,7 +56,7 @@
   </url>
   <url>
     <loc>https://flights.lior-ai.com/blog/</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -171,6 +171,12 @@
   <url>
     <loc>https://flights.lior-ai.com/blog/hand-luggage-rules-2026.html</loc>
     <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://flights.lior-ai.com/blog/denied-boarding-overbooking-compensation-2026.html</loc>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
