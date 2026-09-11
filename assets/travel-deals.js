@@ -96,10 +96,13 @@
      tpo=...-764091). Verified live; do not "fix" them by adding marker params. */
   var EKTA_URL     = 'https://ektatraveling.tpx.li/FE3ZLDAD';
   var KIWITAXI_URL = 'https://kiwitaxi.tpx.li/IMwND3YK';
-  // NOT LIVE: this short link returns {"error":"not found a link","status":404}.
-  // The car block stays out of every page's tp-blocks until a working link exists;
-  // swapping this constant and adding "car" to the meta is all that's needed then.
-  var GETRENTACAR_URL = 'https://getrentacar.tpx.li/GGcaNliJ';
+  /* Verified live 11/09/2026: this link redirects to getrentacar.com with
+     track_id=...-764091, i.e. the marker is attached, same pattern as EKTA and
+     Kiwitaxi. The previous slug was a transcription typo (lowercase L in place of
+     the second i) and returned 404 — that, not a missing program, is why the car
+     block had been kept out of every page's tp-blocks. GetRentacar is connected
+     in the dashboard: 10% reward, 90-day cookie. */
+  var GETRENTACAR_URL = 'https://getrentacar.tpx.li/GGcaNiiJ';
 
   function airaloUrl() {
     // Keep the country landing page where we know it: the redirector forwards the
